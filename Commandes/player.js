@@ -22,7 +22,7 @@ module.exports.run = (bot, message, args, con) => {
                 } else {
                     embed.addField("__Treasure hunt__", (result[0].streak + " days " + ((result[0].isStreakBroken[0] === 1 ? " [broken]" : " [active]"))), true)
                 }
-                embed.addField("<:driverscore:815363448086986754> • __Driver score__", Number(result[0].score).toLocaleString('en-GB') + " D", true)
+                embed.addField("__Driver score__", Number(result[0].score).toLocaleString('en-GB') + " D", true)
                     .addField("__Cars owned__", result[0].nbcar + "", true)
                     .addField("__Membership__", (result[0].premium[0] === 1 ? "Premium" : "Freemium"), true)
                     .addField("__Crew__", (result[0].crewtag ? "[" + result[0].crewtag + "] " + result[0].crewname : "Not in a crew"), true)
