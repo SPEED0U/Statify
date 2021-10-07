@@ -1,4 +1,5 @@
 const settings = require("../settings.json");
+const { MessageEmbed } = require('discord.js');
 module.exports.run = (bot, message, args, con) => {
     if ((message.channel.id === settings.channel.command.admin || message.channel.id === settings.channel.command.moderator) && (message.member && message.member.roles.cache.find(r => r.id === settings.role.moderator))) {
         con.query("SELECT ID, USERID, iconIndex FROM PERSONA WHERE name = ?", [args[0]], (err, pid) => {
@@ -13,7 +14,7 @@ module.exports.run = (bot, message, args, con) => {
                                     const embed = new MessageEmbed()
                                         .setAuthor(args[0].toUpperCase() + " has been renamed.", settings.url.avatarEndpoint + icon)
                                         .setColor("#0080ff")
-                                        .addField("Renamed to", personaid)
+                                        .addField("Renamed to", personaid.toString())
                                         .addField("Renamed by", message.author.tag)
                                         .setFooter(bot.user.tag, bot.user.displayAvatarURL())
                                         .setTimestamp()
