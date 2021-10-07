@@ -9,7 +9,7 @@ module.exports.run = (bot, message, args, con) => {
                     con.query("SELECT ID FROM PERSONA WHERE name = ?", [args[1]], (err, result1) => {
                         if (result1.length === 0) {
                             con.query("UPDATE PERSONA SET name = ? WHERE ID = " + personaid, [args[1].toUpperCase()], err => {
-                                if (!err)
+                                if (!err) {
                                     const embed = new MessageEmbed()
                                         .setAuthor(args[0].toUpperCase() + " has been renamed.", settings.url.avatarEndpoint + icon)
                                         .setColor("#0080ff")
@@ -18,7 +18,7 @@ module.exports.run = (bot, message, args, con) => {
                                         .setFooter(bot.user.tag, bot.user.displayAvatarURL())
                                         .setTimestamp()
                                 bot.channels.cache.get(settings.channel.banlogs).send({ embeds: [embed] })
-                                message.channel.send({ embeds: [embed] })
+                                message.channel.send({ embeds: [embed] })}
                             })
                         } else {
                             message.channel.send("There is already a **driver** called **" + args[1].toUpperCase() + "**.")
