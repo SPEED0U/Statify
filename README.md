@@ -99,6 +99,8 @@ Role configuration
 URL configuration
 - `url.website`, the URL of the server's website.
 - `url.avatarEndpoint`, the URL of the path containing avatar images. Example: `21.jpg` is the 21th avatar in-game.
+- `url.pathToProfile`, the path to the user profile on website.
+- `url.avatarFormat`, the format of images hosted on the avatar endpoint.
 
 Core configuration
 - `core.serverName`, the name of your NFS:W server.
