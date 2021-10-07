@@ -1,0 +1,22 @@
+{
+    "name": "statify",
+    "version": "1.2.1",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Speedou",
+    "license": "MIT",
+    "dependencies": {
+        "axios": "^0.21.4",
+        "cron": "^1.8.2",
+        "discord.js": "^13.1.0",
+        "http": "^0.0.1-security",
+        "index": "^0.4.0",
+        "mysql": "^2.18.1",
+        "request": "^2.88.2",
+        "request-promise-native": "^1.0.7",
+        "superagent": "^5.1.0"
+    }
+}

@@ -1,0 +1,62 @@
+{
+    "bot" : {
+        "prefix" : "s!",
+        "token" : "",
+        "serverid" : "",
+        "embed" : {
+            "hexColor" : "#6600ff",
+            "logo" : "https://image.url/logo.png"
+        }
+    },
+
+    "channel" : {
+        "announcement" : "",
+        "support" : {
+            "needhelp" : "",
+            "bugreport" : ""
+        },
+        "banlogs" : "",
+        "serverlogs" : "",
+        "status" : "",
+        "command" : {
+            "admin" : "",
+            "moderator" : "",
+            "public" : ""
+        }
+    },
+
+    "role" : {
+        "admin" : "",
+        "moderator" : "",
+        "launcher" : "",
+        "player" : "",
+        "onArrival" : "disabled",
+        "countdown" : 600000
+    },
+
+    "url" : {
+        "website" : "https://your.website",
+        "avatarEndpoint" : "https://avatar.endpoint.url/"
+    },
+
+    "core" : {
+        "serverName" : "",
+        "url" : "http://url.ofyour.core:8080",
+        "token" : {
+            "server" : "",
+            "openfire" : ""
+        }
+    },
+
+    "sql" : {
+        "host" : "",
+        "user" : "",
+        "password" : "",
+        "database" : ""
+    },
+
+    "antispam" : {
+        "maxDuplicate" : 3,
+        "delay" : 5 
+    }
+}
