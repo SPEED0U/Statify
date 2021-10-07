@@ -36,6 +36,8 @@
 
     "url" : {
         "website" : "https://your.website",
+        "pathToProfile" : "/player/driver/",
+        "avatarFormat" : ".jpg",
         "avatarEndpoint" : "https://avatar.endpoint.url/"
     },
 
