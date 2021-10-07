@@ -1,10 +1,10 @@
 const settings = require("../settings.json");
 module.exports.run = (bot, message, args, con) => {
     if ((message.channel.id === settings.channel.command.admin || message.channel.id === settings.channel.command.moderator) && (message.member && message.member.roles.cache.find(r => r.id === settings.role.moderator))) {
-        con.query("SELECT ID, USERID FROM PERSONA WHERE name = ?", [args[0]], (err, pid) => {
+        con.query("SELECT ID, USERID, iconIndex FROM PERSONA WHERE name = ?", [args[0]], (err, pid) => {
             if (pid.length > 0) {
                 let personaid = pid[0].ID
-                var icon = result[0].iconIndex + settings.url.avatarFormat
+                var icon = pid[0].iconIndex + settings.url.avatarFormat
                 if (args[1] != undefined) {
                     con.query("SELECT ID FROM PERSONA WHERE name = ?", [args[1]], (err, result1) => {
                         if (result1.length === 0) {
