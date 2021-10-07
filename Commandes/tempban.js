@@ -31,7 +31,7 @@ module.exports.run = (bot, message, args, con) => {
                         var reason = message.content.replace("s!tempban", '').replace(args[0], '').replace(args[1], '').trim();
                         var nosuffix = args[1].substring(0, args[1].length - 1);
                         var durationsuffix = args[1].slice(-1)
-                        var icon = result[0].iconIndex + ".jpg"
+                        var icon = result[0].iconIndex + settings.url.avatarFormat
                         const units = {
                             d: "day(s)",
                             w: "week(s)",
