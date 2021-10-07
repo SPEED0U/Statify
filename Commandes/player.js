@@ -13,7 +13,7 @@ module.exports.run = (bot, message, args, con) => {
                         embed.addField("__Level__", result[0].personalevel + " (Prestige: " + result[0].prestige + ")", true)
                     }
                     else {
-                        embed.addField("__Level__", result[0].personalevel, true)
+                        embed.addField("__Level__", result[0].personalevel.toString(), true)
                     }
                     embed.addField("__Cash__", Number(result[0].cash).toLocaleString('en-GB') + " $", true)
                     .addField("__Speedboost__", Number(result[0].boost).toLocaleString('en-GB') + " SB", true)
