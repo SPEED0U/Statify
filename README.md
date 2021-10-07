@@ -123,6 +123,6 @@ Run the following commands into your terminal.
 - `git clone https://github.com/SPEED0U/Statify/`
 - `npm install`
 
-Realized with ❤️ by [ZerioDev](https://github.com/SPEED0U), [Floruzus](https://github.com/Floruzus) and [MeTonaTOR](https://github.com/MeTonaTOR).
+Realized with ❤️ by [Speedou](https://github.com/SPEED0U), [Floruzus](https://github.com/Floruzus) and [MeTonaTOR](https://github.com/MeTonaTOR).
 
 Please do not withdraw the license and keep the credits on this project.
