@@ -7,8 +7,8 @@ module.exports.run = (bot, message, args, con) => {
             if (result.length > 0) {
                 let description = !!result[0].personamotto ? result[0].personamotto : "Motto not set."
                 const embed = new MessageEmbed()
-                    .setAuthor(result[0].personaname, "", settings.url.website + "/player/driver/" + result[0].personaid, true)
-                    .setThumbnail(settings.url.avatarEndpoint + result[0].iconIndex + '.jpg', true)
+                    .setAuthor(result[0].personaname, "", settings.url.website + settings.url.pathToProfile + result[0].personaid, true)
+                    .setThumbnail(settings.url.avatarEndpoint + result[0].iconIndex + settings.url.avatarFormat, true)
                     .addField("<:rep:814916853318025227> • __Level__", result[0].personalevel + " (Prestige: " + result[0].prestige + ")", true)
                     .addField("<:cash:814916853595766784> • __Cash__", Number(result[0].cash).toLocaleString('en-GB') + " $", true)
                     .addField("<:speedboost:815940388937269269> • __Speedboost__", Number(result[0].boost).toLocaleString('en-GB') + " SB", true)
@@ -29,7 +29,7 @@ module.exports.run = (bot, message, args, con) => {
                         new MessageButton()
                             .setLabel('View full profile on website')
                             .setStyle('LINK')
-                            .setURL(settings.url.website + "/player/driver/" + result[0].personaid)
+                            .setURL(settings.url.website + settings.url.pathToProfile + result[0].personaid)
                     );
 
                 message.channel.send({ embeds: [embed], components: [messagebutton] })
