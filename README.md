@@ -120,8 +120,8 @@ To use the project correctly you will need some tools.
 [Node JS](https://nodejs.org/en/) (v16).
 
 Run the following commands into your terminal.
-Download the bot files: `git clone https://github.com/SPEED0U/Statify/`
-Install the dependencies: `npm install`
+1.`git clone https://github.com/SPEED0U/Statify/`
+2. `npm install`
 
 Realized with ❤️ by [ZerioDev](https://github.com/SPEED0U), [Floruzus](https://github.com/Floruzus) and [MeTonaTOR](https://github.com/MeTonaTOR).
 
