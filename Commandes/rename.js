@@ -14,7 +14,7 @@ module.exports.run = (bot, message, args, con) => {
                                     const embed = new MessageEmbed()
                                         .setAuthor(args[0].toUpperCase() + " has been renamed.", settings.url.avatarEndpoint + icon)
                                         .setColor("#0080ff")
-                                        .addField("Renamed to", args[0].toString())
+                                        .addField("Renamed to", args[1].toString().toUpperCase())
                                         .addField("Renamed by", message.author.tag)
                                         .setFooter(bot.user.tag, bot.user.displayAvatarURL())
                                         .setTimestamp()
