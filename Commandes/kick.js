@@ -12,7 +12,7 @@ module.exports.run = (bot, message, args, con) => {
                     announcementAuth: settings.core.token.server
                 })
                 var reason = message.content.replace("s!kick", '').replace(args[0], '').trim();
-                var icon = result[0].iconIndex + ".jpg";
+                var icon = result[0].iconIndex + settings.url.avatarFormat
                 const config = { headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' } };
                 axios.post(settings.core.url + '/Engine.svc/Send/Announcement', post, config)
                 axios.post(settings.core.url + '/Engine.svc/ofcmdhook?webhook=false&pid=273463&cmd=kick%20' + args[0], null, { headers: { Authorization: settings.core.token.openfire } }).then(res => { }).catch(error => { })

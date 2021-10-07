@@ -9,7 +9,7 @@ module.exports.run = (bot, message, args, con) => {
             } else {
                 if (result.length > 0) {
                     var userid = result[0].USERID;
-                    var icon = result[0].iconIndex + ".jpg"
+                    var icon = result[0].iconIndex + settings.url.avatarFormat
                     con.query("SELECT started,ends_at,reason,active FROM BAN WHERE user_id = " + userid, (err, result1) => {
                         if (result1.length > 0) {
                             result1.forEach(ban => {
