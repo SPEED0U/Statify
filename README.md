@@ -44,6 +44,8 @@ Open the **settings** file located in the main folder of the bot `settings.json`
 
     "url" : {
         "website" : "https://your.website",
+        "pathToProfile" : "/player/driver/",
+        "avatarFormat" : ".jpg",
         "avatarEndpoint" : "https://avatar.endpoint.url/"
     },
 
