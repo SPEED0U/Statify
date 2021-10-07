@@ -117,11 +117,14 @@ Antispam configuration
 ### Installation
 
 To use the project correctly you will need some tools.
-[Node JS](https://nodejs.org/en/) (v16).
+- [Node JS](https://nodejs.org/en/) (v16.X.X).
 
 Run the following commands into your terminal.
 - `git clone https://github.com/SPEED0U/Statify/`
 - `npm install`
+
+Use the following command to update the bot when there is a new version.
+- `git update`
 
 Realized with ❤️ by [Speedou](https://github.com/SPEED0U), [Floruzus](https://github.com/Floruzus) and [MeTonaTOR](https://github.com/MeTonaTOR).
 
