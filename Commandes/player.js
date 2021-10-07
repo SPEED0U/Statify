@@ -9,19 +9,24 @@ module.exports.run = (bot, message, args, con) => {
                 const embed = new MessageEmbed()
                     .setAuthor(result[0].personaname, "", settings.url.website + settings.url.pathToProfile + result[0].personaid, true)
                     .setThumbnail(settings.url.avatarEndpoint + result[0].iconIndex + settings.url.avatarFormat, true)
-                    .addField("<:rep:814916853318025227> • __Level__", result[0].personalevel + " (Prestige: " + result[0].prestige + ")", true)
-                    .addField("<:cash:814916853595766784> • __Cash__", Number(result[0].cash).toLocaleString('en-GB') + " $", true)
-                    .addField("<:speedboost:815940388937269269> • __Speedboost__", Number(result[0].boost).toLocaleString('en-GB') + " SB", true)
+                    if (result[0].prestige > 0) {
+                        embed.addField("__Level__", result[0].personalevel + " (Prestige: " + result[0].prestige + ")", true)
+                    }
+                    else {
+                        embed.addField("__Level__", result[0].personalevel, true)
+                    }
+                    embed.addField("__Cash__", Number(result[0].cash).toLocaleString('en-GB') + " $", true)
+                    .addField("__Speedboost__", Number(result[0].boost).toLocaleString('en-GB') + " SB", true)
                 if (result[0].streak <= 1) {
-                    embed.addField("💎 • __Treasure hunt__", (result[0].streak + " day " + ((result[0].isStreakBroken[0] === 1 ? " <:thbroken:815945367115137054>" : " <:thok:815945367110549504>"))), true)
+                    embed.addField("__Treasure hunt__", (result[0].streak + " day " + ((result[0].isStreakBroken[0] === 1 ? " [broken]" : " [active]"))), true)
                 } else {
-                    embed.addField("💎 • __Treasure hunt__", (result[0].streak + " days " + ((result[0].isStreakBroken[0] === 1 ? " <:thbroken:815945367115137054>" : " <:thok:815945367110549504>"))), true)
+                    embed.addField("__Treasure hunt__", (result[0].streak + " days " + ((result[0].isStreakBroken[0] === 1 ? " [broken]" : " [active]"))), true)
                 }
                 embed.addField("<:driverscore:815363448086986754> • __Driver score__", Number(result[0].score).toLocaleString('en-GB') + " D", true)
-                    .addField("🚘 • __Cars owned__", result[0].nbcar + "", true)
-                    .addField("🎖️ • __Membership__", (result[0].premium[0] === 1 ? "Premium" : "Freemium"), true)
-                    .addField("👨‍👨‍👧 • __Crew__", (result[0].crewtag ? "[" + result[0].crewtag + "] " + result[0].crewname : "Not in a crew"), true)
-                    .addField("🏁 • __Races completed__", Number(result[0].eventsdone).toLocaleString('en-GB'), true)
+                    .addField("__Cars owned__", result[0].nbcar + "", true)
+                    .addField("__Membership__", (result[0].premium[0] === 1 ? "Premium" : "Freemium"), true)
+                    .addField("__Crew__", (result[0].crewtag ? "[" + result[0].crewtag + "] " + result[0].crewname : "Not in a crew"), true)
+                    .addField("__Races completed__", Number(result[0].eventsdone).toLocaleString('en-GB'), true)
                     .setColor("#6600ff")
                     .setDescription("Motto: " + "`" + description + "`")
                 const messagebutton = new MessageActionRow()
