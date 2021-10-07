@@ -92,11 +92,11 @@ Role configuration
 - `role.launcher`, the id of the launcher maintainer role.
 - `role.player`, the id of the player role.
 - `role.onArrival`, the role given on arrival, set to `disabled` if you don't want that function.
-- `role.countdown`, the delay to give the `onArrival` role when someone join the discord server if the function is not disabled.
+- `role.countdown`, the delay to give the `onArrival` role when someone join if not disabled.
 
 URL configuration
 - `url.website`, the URL of the server's website.
-- `url.avatarEndpoint`, the URL of the path containing avatar images. Example: `21.jpg` is the 21th avatar available in-game.
+- `url.avatarEndpoint`, the URL of the path containing avatar images. Example: `21.jpg` is the 21th avatar in-game.
 
 Core configuration
 - `core.serverName`, the name of your NFS:W server.
