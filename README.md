@@ -124,7 +124,7 @@ Run the following commands into your terminal.
 - `npm install`
 
 Use the following command to update the bot when there is a new version.
-- `git update`
+- `git pull`
 
 Realized with ❤️ by [Speedou](https://github.com/SPEED0U), [Floruzus](https://github.com/Floruzus) and [MeTonaTOR](https://github.com/MeTonaTOR).
 
