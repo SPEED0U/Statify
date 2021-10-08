@@ -1,2 +1,5 @@
 # Ignore settings file
 settings.json
+
+# Ignore readme
+README.md
