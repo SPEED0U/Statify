@@ -3,7 +3,7 @@ With this Discord bot you can easily manage your **Need for Speed: World** serve
 As this project is **open-source** you're free to do modifications and pull requests.
 
 ### Configuration
-Open the **settings** file located in the main folder of the bot `settings.json`.
+Duplicate the `settings.example.json` file and rename it to `settings.json` then fill **every** parameters (details below).
 
 ```JSON
 {
@@ -127,9 +127,17 @@ Run the following commands into your terminal.
 - `git clone https://github.com/SPEED0U/Statify/`
 - `npm install`
 
+### How to run
+
+Go to the folder where the bot files are located and run the following command.
+- `node index.js`
+
+### Updating
+
 Use the following command to update the bot when there is a new version.
 - `git pull`
 
+#
 Realized with ❤️ by [Speedou](https://github.com/SPEED0U), [Floruzus](https://github.com/Floruzus) and [MeTonaTOR](https://github.com/MeTonaTOR).
 
 Please do not withdraw the license and keep the credits on this project.
