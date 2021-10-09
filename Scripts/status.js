@@ -26,14 +26,14 @@ module.exports = (bot, con) => {
             }
 
             if (json.onlineNumber.toString() <= settings.maxPlayerAnnounceLobby) {
-                con.query("SELECT value FROM PARAMETERS WHERE name = 'SBRWR_INFORM_EVENT'", function (err, paramresult) {
+                con.query("SELECT value FROM PARAMETER WHERE name = 'SBRWR_INFORM_EVENT'", function (err, paramresult) {
                     if (paramresult == "false")  {
                         con.query("UPDATE PARAMETERS SET value = 'true' WHERE name = 'SBRWR_INFORM_EVENT'")
                         axios.post(settings.core.url + '/Engine.svc/ReloadParameters', "adminAuth=" + settings.core.token.server, null)
                     }
                 })
             } else if (json.onlineNumber.toString() > settings.maxPlayerAnnounceLobby) {
-                con.query("SELECT value FROM PARAMETERS WHERE name = 'SBRWR_INFORM_EVENT'", function (err, paramresult) {
+                con.query("SELECT value FROM PARAMETER WHERE name = 'SBRWR_INFORM_EVENT'", function (err, paramresult) {
                     if (paramresult == "true")  {
                         con.query("UPDATE PARAMETERS SET value = 'false' WHERE name = 'SBRWR_INFORM_EVENT'")
                         axios.post(settings.core.url + '/Engine.svc/ReloadParameters', "adminAuth=" + settings.core.token.server, null)
@@ -119,8 +119,8 @@ module.exports = (bot, con) => {
             })
         })
     }
-    const jobmaxplayer = new CronJob('0-59 * * * *', playersonline)
-    const jobstatus = new CronJob('0-59 * * * *', serverstatus)
+    const jobmaxplayer = new CronJob('* * * * *', playersonline)
+    const jobstatus = new CronJob('* * * * *', serverstatus)
     
 
     jobmaxplayer.start()
