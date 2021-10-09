@@ -44,6 +44,7 @@
     "core" : {
         "serverName" : "",
         "url" : "http://url.ofyour.core:8080",
+        "maxPlayerAnnounceLobby" : "",
         "token" : {
             "server" : "",
             "openfire" : ""
