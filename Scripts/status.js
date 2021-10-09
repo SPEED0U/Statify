@@ -119,8 +119,8 @@ module.exports = (bot, con) => {
             })
         })
     }
-    const jobmaxplayer = new CronJob('1 * * * *', playersonline)
-    const jobstatus = new CronJob('1 * * * *', serverstatus)
+    const jobmaxplayer = new CronJob('0-59 * * * *', playersonline)
+    const jobstatus = new CronJob('0-59 * * * *', serverstatus)
     
 
     jobmaxplayer.start()
