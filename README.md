@@ -52,6 +52,7 @@ Duplicate the `settings.example.json` file and rename it to `settings.json` then
     "core" : {
         "serverName" : "",
         "url" : "http://url.ofyour.core:8080",
+        "maxPlayerAnnounceLobby" : "",
         "token" : {
             "server" : "",
             "openfire" : ""
@@ -105,6 +106,7 @@ URL configuration
 Core configuration
 - `core.serverName`, the name of your NFS:W server.
 - `core.url`, the URL of your server's core, example in `settings.json`.
+- `core.maxPlayerAnnounceLobby`, the maximum player account where the "search for player" information on chat is enabled.
 - `core.token.server`, the admin token of your server.
 - `core.token.openfire`, the openfire token of your server.
 
