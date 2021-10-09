@@ -35,7 +35,7 @@ module.exports = (bot, con) => {
             } else if (json.onlineNumber.toString() > settings.maxPlayerAnnounceLobby) {
                 con.query("SELECT value FROM PARAMETER WHERE name = 'SBRWR_INFORM_EVENT'", function (err, paramresult) {
                     if (paramresult == "true")  {
-                        con.query("UPDATE PARAMETERS SET value = 'false' WHERE name = 'SBRWR_INFORM_EVENT'")
+                        con.query("UPDATE PARAMETER SET value = 'false' WHERE name = 'SBRWR_INFORM_EVENT'")
                         axios.post(settings.core.url + '/Engine.svc/ReloadParameters', "adminAuth=" + settings.core.token.server, null)
                     }
                 })
