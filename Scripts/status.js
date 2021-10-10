@@ -25,16 +25,16 @@ module.exports = (bot, con) => {
                 throw ''
             }
 
-            if (json.onlineNumber.toString() <= settings.core.maxPlayerAnnounceLobby) {
+            if (json.onlineNumber <= settings.core.maxPlayerAnnounceLobby) {
                 con.query("SELECT value FROM PARAMETER WHERE name = 'SBRWR_INFORM_EVENT'", function (err, paramresult) {
-                    if (paramresult[0].value === "false")  {
+                    if (paramresult[0].value == "false")  {
                         con.query("UPDATE PARAMETER SET value = 'true' WHERE name = 'SBRWR_INFORM_EVENT'")
                         axios.post(settings.core.url + '/Engine.svc/ReloadParameters', "adminAuth=" + settings.core.token.server, null)
                     }
                 })
-            } else if (json.onlineNumber.toString() > settings.core.maxPlayerAnnounceLobby) {
+            } else if (json.onlineNumber > settings.core.maxPlayerAnnounceLobby) {
                 con.query("SELECT value FROM PARAMETER WHERE name = 'SBRWR_INFORM_EVENT'", function (err, paramresult) {
-                    if (paramresult[0].value === "true")  {
+                    if (paramresult[0].value == "true")  {
                         con.query("UPDATE PARAMETER SET value = 'false' WHERE name = 'SBRWR_INFORM_EVENT'")
                         axios.post(settings.core.url + '/Engine.svc/ReloadParameters', "adminAuth=" + settings.core.token.server, null)
                     }
