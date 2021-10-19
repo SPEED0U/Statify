@@ -22,7 +22,7 @@ function convertToIntervalTime(date) {
 module.exports.run = (bot, message, args, con) => {
     if (message.channel.id === settings.channel.command.admin || message.channel.id === settings.channel.command.moderator && (message.member && message.member.roles.cache.find(r => r.id === settings.role.moderator))) {
         if (args[1].match(/^([0-9]+)(d|m|y|w)$/)) {
-            con.query("SELECT USERID, ID, iconIndex FROM PERSONA WHERE name = ?", [args[0]], (err, result) => {
+            con.query("SELECT USERID, ID, iconIndex, name FROM PERSONA WHERE name = ?", [args[0]], (err, result) => {
                 if (err) {
                     message.channel.send("Failed to execute command: " + err);
                 } else {
@@ -43,17 +43,17 @@ module.exports.run = (bot, message, args, con) => {
                                 if (result1.length == 0) {
                                     con.query("INSERT INTO `BAN` (`id`, `ends_at`, `reason`, `started`, `banned_by_id`, `user_id`, `active`) VALUES (NULL, " + convertToIntervalTime(args[1]) + ", ?, NOW(), '273463', ?, 1)", [reason, userid], err => {
                                         con.query("UPDATE HARDWARE_INFO SET banned = 1 WHERE userId = " + userid)
-                                        axios.post(settings.core.url + '/Engine.svc/ofcmdhook?webhook=false&pid=273463&cmd=kick%20' + args[0], null, { headers: { Authorization: settings.core.token.openfire } }).then(res => { }).catch(error => { })
+                                        axios.post(settings.core.url + '/Engine.svc/ofcmdhook?webhook=false&pid=273463&cmd=kick%20' + result[0].name, null, { headers: { Authorization: settings.core.token.openfire } }).then(res => { }).catch(error => { })
                                         if (!err) {
                                             const post = querystring.stringify({
-                                                message: `TXT_RED,[${args[0]}] HAS BEEN TEMPORARILY BANNED FOR` + nosuffix.toUpperCase() + " " + units[durationsuffix].toUpperCase() + ".",
+                                                message: `TXT_RED,[${result[0].name}] HAS BEEN TEMPORARILY BANNED FOR` + nosuffix.toUpperCase() + " " + units[durationsuffix].toUpperCase() + ".",
                                                 announcementAuth: settings.core.token.server
                                             })
                                             const config = { headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' } };
                                             axios.post(settings.core.url + '/Engine.svc/Send/Announcement', post, config)
                                             if (reason.length > 0) {
                                                 const embed = new MessageEmbed()
-                                                .setAuthor(args[0].toUpperCase() + " has been temporarily banned.", settings.url.avatarEndpoint + icon)
+                                                .setAuthor(result[0].name + " has been temporarily banned.", settings.url.avatarEndpoint + icon)
                                                 .setColor("#ff6600")
                                                 .addField("Reason", reason)
                                                 .addField("Ban duration", nosuffix + " " + units[durationsuffix])
@@ -64,7 +64,7 @@ module.exports.run = (bot, message, args, con) => {
                                             message.channel.send({embeds:[embed]})
                                             } else {
                                                 const embed = new MessageEmbed()
-                                                .setAuthor(args[0].toUpperCase() + " has been temporarily banned.", settings.url.avatarEndpoint + icon)
+                                                .setAuthor(result[0].name + " has been temporarily banned.", settings.url.avatarEndpoint + icon)
                                                 .setColor("#ff6600")
                                                 .addField("Reason", "No reason specified.")
                                                 .addField("Ban duration", nosuffix + " " + units[durationsuffix])
@@ -80,11 +80,11 @@ module.exports.run = (bot, message, args, con) => {
                                     })
                                 }
                                 else {
-                                    message.channel.send("**" + args[0] + "** already have an active ban.")
+                                    message.channel.send("**" + result[0].name + "** already have an active ban.")
                                 }
                             })
                     } else {
-                        message.channel.send("Driver **+" + args[0] + "** not found.");
+                        message.channel.send("Driver **+" + result[0].name + "** not found.");
                     }
                 }
             });

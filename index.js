@@ -10,6 +10,21 @@ var con = mysql.createConnection({
     password: settings.sql.password,
     database: settings.sql.database
 });
+import AutoGitUpdate from 'auto-git-update';
+
+const config = {
+    repository: 'https://github.com/SPEED0U/Statify',
+    tempLocation: './tmp/',
+    ignoreFiles: [],
+    executeOnComplete: '',
+    exitOnComplete: true
+}
+
+const updater = new AutoGitUpdate(config);
+
+updater.autoUpdate();
+
+
 
 // Token du bot pour qu'il se connecte au serveur discord.
 bot.login(settings.bot.token)

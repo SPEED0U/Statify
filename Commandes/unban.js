@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports.run = (bot, message, args, con) => {
     if (message.channel.id === settings.channel.command.admin || message.channel.id === settings.channel.command.moderator && (message.member && message.member.roles.cache.find(r => r.id === settings.role.moderator))) {
-        con.query("SELECT USERID FROM PERSONA WHERE name = ?", [args[0]], (err, result) => {
+        con.query("SELECT USERID, name, iconIndex FROM PERSONA WHERE name = ?", [args[0]], (err, result) => {
             if (err) {
                 message.channel.send("Failed to execute command: " + err);
             } else {
@@ -18,7 +18,7 @@ module.exports.run = (bot, message, args, con) => {
                                     con.query("UPDATE HARDWARE_INFO SET banned = 0 WHERE userId = " + userid)
                                     if (reason.length > 0) {
                                         const embed = new MessageEmbed()
-                                        .setAuthor(args[0].toUpperCase() + " has been unbanned.", settings.url.avatarEndpoint + icon)
+                                        .setAuthor(result[0].name + " has been unbanned.", settings.url.avatarEndpoint + icon)
                                         .setColor("#11ff00")
                                         .addField("Reason", reason)
                                         .addField("Unbanned by", message.author.tag)
@@ -28,7 +28,7 @@ module.exports.run = (bot, message, args, con) => {
                                     message.channel.send({embeds:[embed]})
                                     } else {
                                         const embed = new MessageEmbed()
-                                        .setAuthor(args[0].toUpperCase() + " has been unbanned.", settings.url.avatarEndpoint + icon)
+                                        .setAuthor(result[0].name + " has been unbanned.", settings.url.avatarEndpoint + icon)
                                         .setColor("#11ff00")
                                         .addField("Reason", "No reason specified.")
                                         .addField("Unbanned by", message.author.tag)
@@ -40,7 +40,7 @@ module.exports.run = (bot, message, args, con) => {
                                 }
                             }
                             else {
-                                message.channel.send("**" + args[0] + "** doesn't have any active ban.")
+                                message.channel.send("The driver **" + args[0] + "** doesn't have any active ban.")
                             }
                         }))
 
