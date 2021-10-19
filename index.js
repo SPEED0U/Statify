@@ -18,7 +18,7 @@ bot.on("ready", function() {
     // Importation du fichier : Events.
     fs.readdir('./Events/', (error, f) => {
             if (error) { return console.error(error); }
-            console.log(`${f.length} events chargés`);
+            console.log(`${f.length} events loaded.`);
 
             f.forEach((f) => {
                 let events = require(`./Events/${f}`);
@@ -29,7 +29,7 @@ bot.on("ready", function() {
         // Importation des scripts
     fs.readdir('./Scripts/', (error, f) => {
             if (error) { return console.error(error); }
-            console.log(`${f.length} scripts chargés`);
+            console.log(`${f.length} script loaded.`);
 
             f.forEach((f) => {
                 let events = require(`./Scripts/${f}`);
@@ -44,7 +44,7 @@ bot.on("ready", function() {
 
         commandes.forEach((f) => {
             let commande = require(`./Commandes/${f}`);
-            console.log(`${f} commande chargée !`);
+            console.log(`${f} command loaded.`);
             bot.commands.set(commande.help.name, commande);
         });
     });
