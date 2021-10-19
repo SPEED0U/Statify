@@ -120,7 +120,7 @@ Antispam configuration
 - `antispam.maxDuplicate`, the number of times someone can send duplicated text.
 - `antispam.delay`, the maximum watch delay between duplicated messages.
 
-### Installation
+### How to install
 
 To use the project correctly you will need some tools.
 - [Node JS](https://nodejs.org/en/) (v16.X.X).
@@ -129,15 +129,25 @@ Run the following commands into your terminal.
 - `git clone https://github.com/SPEED0U/Statify/`
 - `npm install`
 
+
 ### How to run
 
-Go to the folder where the bot files are located and run the following command.
+Go to the folder where the bot files are located and run the following commands.
 - `node index.js`
 
-### Updating
+### How to update
 
 Use the following command to update the bot when there is a new version.
 - `git pull`
+- `npm install`
+
+### All-in-one (update & run)
+
+Type the following command to use the easiest way to update the bot and run it.
+- `./Start.sh`
+
+*This command apply updates available from this repo, installs the required node packages and then run the bot.*
+
 
 #
 Realized with ❤️ by [Speedou](https://github.com/SPEED0U), [Floruzus](https://github.com/Floruzus) and [MeTonaTOR](https://github.com/MeTonaTOR).
