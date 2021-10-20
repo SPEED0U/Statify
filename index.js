@@ -37,13 +37,13 @@ bot.on("ready", function() {
             });
         })
         /// Importation du fichier : Commandes/.
-    fs.readdir("./Commandes/", (error, f) => {
+    fs.readdir("./Commands/", (error, f) => {
         if (error) { return console.error(error); }
         let commandes = f.filter(f => f.split(".").pop() === "js");
-        if (commandes.length <= 0) { return console.log("Aucune commande trouvée !"); }
+        if (commandes.length <= 0) { return console.log("No command found."); }
 
         commandes.forEach((f) => {
-            let commande = require(`./Commandes/${f}`);
+            let commande = require(`./Commands/${f}`);
             console.log(`${f} command loaded.`);
             bot.commands.set(commande.help.name, commande);
         });
