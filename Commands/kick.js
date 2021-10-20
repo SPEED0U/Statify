@@ -5,7 +5,7 @@ const querystring = require('querystring')
 
 module.exports.run = (bot, message, args, con) => {
     if (message.channel.id === settings.channel.command.admin || message.channel.id === settings.channel.command.moderator && (message.member && message.member.roles.cache.find(r => r.id === settings.role.moderator))) {
-        con.query("SELECT USERID, ID, name iconIndex FROM PERSONA WHERE name = ?", [args[0].toUpperCase()], (err, result) => {
+        con.query("SELECT USERID, ID, name, iconIndex FROM PERSONA WHERE name = ?", [args[0].toUpperCase()], (err, result) => {
             if (result.length == 1) {
                 const post = querystring.stringify({
                     message: `TXT_ORANGE,[${result[0].name}] HAS BEEN KICKED.`,
@@ -21,7 +21,7 @@ module.exports.run = (bot, message, args, con) => {
                     .setAuthor(result[0].name + " has been kicked.", settings.url.avatarEndpoint + icon)
                     .setColor("#fff700")
                     .addField("Reason", reason)
-                    .addField("Kicked by", message.author.tag)
+                    .addField("Kicked by", "<@" + message.author.id + ">")
                     .setFooter(bot.user.tag, bot.user.displayAvatarURL())
                     .setTimestamp()
                 bot.channels.cache.get(settings.channel.banlogs).send({ embeds: [embed] })
@@ -31,7 +31,7 @@ module.exports.run = (bot, message, args, con) => {
                     .setAuthor(result[0].name + " has been kicked.", settings.url.avatarEndpoint + icon)
                     .setColor("#fff700")
                     .addField("Reason", "No reason specified.")
-                    .addField("Kicked by", message.author.tag)
+                    .addField("Kicked by", "<@" + message.author.id + ">")
                     .setFooter(bot.user.tag, bot.user.displayAvatarURL())
                     .setTimestamp()
                 bot.channels.cache.get(settings.channel.banlogs).send({ embeds: [embed] })
