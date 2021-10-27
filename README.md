@@ -40,13 +40,14 @@ Duplicate the `settings.example.json` file and rename it to `settings.json` then
         "moderator" : "",
         "launcher" : "",
         "player" : "",
-        "onArrival" : "disabled",
+        "onArrival" : false,
         "countdown" : 600000
     },
 
     "url" : {
         "website" : "https://your.website",
         "pathToProfile" : "/player/driver/",
+        "profileFormat" : "ID",
         "avatarFormat" : ".jpg",
         "avatarEndpoint" : "https://avatar.endpoint.url/"
     },
@@ -55,6 +56,7 @@ Duplicate the `settings.example.json` file and rename it to `settings.json` then
         "serverName" : "",
         "url" : "http://url.ofyour.core:8080",
         "maxPlayerAnnounceLobby" : "",
+        "announceLobbies" : true,
         "token" : {
             "server" : "",
             "openfire" : ""
