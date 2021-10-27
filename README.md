@@ -1,11 +1,14 @@
 # Statify
-With this Discord bot you can easily manage your **Need for Speed: World** server and get **stats** of course!
+With this Discord bot you can easily manage your **Need for Speed: World** server and get **stats** of course!  
 As this project is **open-source** you're free to do modifications and pull requests.
 
 The bot is for the moment working only with [Soapbox Reloaded Core](https://github.com/SBRW-Reloaded/reloaded-sbrw-core).
 
 ### Configuration
-Duplicate the `settings.example.json` file and rename it to `settings.json` then fill **every** parameters (details below).
+The following configuration example will be generated in the file `local.settings.json` when you will run the bot for the first time.  
+Once the file generated the bot will ask you to fill **every** settings as your convenance.
+
+Make sure to check **commits** to see if a parameter has been added, if so you'll have to add the new line in the `local.settings.json` file.
 
 ```JSON
 {
