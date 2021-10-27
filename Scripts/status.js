@@ -88,8 +88,7 @@ module.exports = (bot, con) => {
                     }
                 })
             });
-        }).catch((e) => {
-            console.log(e)
+        }).catch(() => {
             const embed = new MessageEmbed()
                 .setAuthor(settings.core.serverName, settings.bot.embed.logo, settings.url.website)
                 .setColor("#ff0000")
@@ -115,7 +114,7 @@ module.exports = (bot, con) => {
                 }
             })
 
-            user.bot.setActivity({
+            bot.user.setActivity({
                 name: "players complain because they don't read #📰-announcements.",
                 type: "WATCHING",
                 url: settings.url.website,
