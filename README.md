@@ -40,13 +40,14 @@ Duplicate the `settings.example.json` file and rename it to `settings.json` then
         "moderator" : "",
         "launcher" : "",
         "player" : "",
-        "onArrival" : "disabled",
+        "onArrival" : false,
         "countdown" : 600000
     },
 
     "url" : {
         "website" : "https://your.website",
         "pathToProfile" : "/player/driver/",
+        "profileFormat" : "ID",
         "avatarFormat" : ".jpg",
         "avatarEndpoint" : "https://avatar.endpoint.url/"
     },
@@ -55,6 +56,7 @@ Duplicate the `settings.example.json` file and rename it to `settings.json` then
         "serverName" : "",
         "url" : "http://url.ofyour.core:8080",
         "maxPlayerAnnounceLobby" : "",
+        "announceLobbies" : true,
         "token" : {
             "server" : "",
             "openfire" : ""
@@ -103,6 +105,7 @@ URL configuration
 - `url.website`, the URL of the server's website.
 - `url.avatarEndpoint`, the URL of the path containing avatar images. Example: `21.jpg` is the 21th avatar in-game.
 - `url.pathToProfile`, the path to the user profile on website.
+- `url.profileFormat`, manage the URL endpoint if your website manage profile url with `ID` or `Name`.
 - `url.avatarFormat`, the format of images hosted on the avatar endpoint.
 
 Core configuration
@@ -111,6 +114,7 @@ Core configuration
 - `core.maxPlayerAnnounceLobby`, the max player count where the "search for player" information on chat is enabled.
 - `core.token.server`, the admin token of your server.
 - `core.token.openfire`, the openfire token of your server.
+- `core.announceLobbies`, enable or disable (`true` or `false`) the lobby announcements in chat managed by the bot.
 
 Database configuration
 - `sql.host`, the host IP of your mysql server.
