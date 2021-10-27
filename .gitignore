@@ -7,8 +7,5 @@ node_modules
 # Ignore workflow
 .github
 
-# Ignore start.sh
-Start.sh
-
 # Ignore local.settings.json
 local.settings.json
