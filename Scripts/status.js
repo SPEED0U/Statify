@@ -26,21 +26,23 @@ module.exports = (bot, con) => {
             if (response.status !== 200 || json.length === 0) {
                 throw ''
             }
-
-            if (json.onlineNumber <= settings.core.maxPlayerAnnounceLobby) {
-                con.query("SELECT value FROM PARAMETER WHERE name = 'SBRWR_INFORM_EVENT'", function (err, paramresult) {
-                    if (paramresult[0].value == "false")  {
-                        con.query("UPDATE PARAMETER SET value = 'true' WHERE name = 'SBRWR_INFORM_EVENT'")
-                        axios.post(settings.core.url + '/Engine.svc/ReloadParameters', "adminAuth=" + settings.core.token.server, null)
-                    }
-                })
-            } else if (json.onlineNumber > settings.core.maxPlayerAnnounceLobby) {
-                con.query("SELECT value FROM PARAMETER WHERE name = 'SBRWR_INFORM_EVENT'", function (err, paramresult) {
-                    if (paramresult[0].value == "true")  {
-                        con.query("UPDATE PARAMETER SET value = 'false' WHERE name = 'SBRWR_INFORM_EVENT'")
-                        axios.post(settings.core.url + '/Engine.svc/ReloadParameters', "adminAuth=" + settings.core.token.server, null)
-                    }
-                })
+            
+            if (settings.core.announceLobbies === true) {
+                if (json.onlineNumber <= settings.core.maxPlayerAnnounceLobby) {
+                    con.query("SELECT value FROM PARAMETER WHERE name = 'SBRWR_INFORM_EVENT'", function (err, paramresult) {
+                        if (paramresult[0].value == "false")  {
+                            con.query("UPDATE PARAMETER SET value = 'true' WHERE name = 'SBRWR_INFORM_EVENT'")
+                            axios.post(settings.core.url + '/Engine.svc/ReloadParameters', "adminAuth=" + settings.core.token.server, null)
+                        }
+                    })
+                } else if (json.onlineNumber > settings.core.maxPlayerAnnounceLobby) {
+                    con.query("SELECT value FROM PARAMETER WHERE name = 'SBRWR_INFORM_EVENT'", function (err, paramresult) {
+                        if (paramresult[0].value == "true")  {
+                            con.query("UPDATE PARAMETER SET value = 'false' WHERE name = 'SBRWR_INFORM_EVENT'")
+                            axios.post(settings.core.url + '/Engine.svc/ReloadParameters', "adminAuth=" + settings.core.token.server, null)
+                        }
+                    })
+                }                
             }
 
             bot.guilds.fetch(settings.bot.serverid).then(guild => {
