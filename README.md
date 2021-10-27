@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://i.imgur.com/KFbTIah.png" />
+</p>  
+
 # Statify
 With this Discord bot you can easily manage your **Need for Speed: World** server and get **stats** of course!  
 As this project is **open-source** you're free to do modifications and pull requests.
