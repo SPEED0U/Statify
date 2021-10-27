@@ -29,13 +29,17 @@ module.exports.run = (bot, message, args, con) => {
                     .addField("__Races completed__", Number(result[0].eventsdone).toLocaleString('en-GB'), true)
                     .setColor("#6600ff")
                     .setDescription("Motto: " + "`" + description + "`")
+
+                const button = new MessageButton()
+                .setLabel('View full profile on website')
+                .setStyle('LINK')
+                if (settings.url.profileFormat == "ID") {
+                    button.setURL(settings.url.website + settings.url.pathToProfile + result[0].personaid)
+                } else if (settings.url.profileFormat == "Name") {
+                    button.setURL(settings.url.website + settings.url.pathToProfile + result[0].personaname)
+                }
                 const messagebutton = new MessageActionRow()
-                    .addComponents(
-                        new MessageButton()
-                            .setLabel('View full profile on website')
-                            .setStyle('LINK')
-                            .setURL(settings.url.website + settings.url.pathToProfile + result[0].personaid)
-                    );
+                    .addComponents(button);
 
                 message.channel.send({ embeds: [embed], components: [messagebutton] })
 
