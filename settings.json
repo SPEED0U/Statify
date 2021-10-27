@@ -4,7 +4,7 @@
         "token" : "",
         "serverid" : "",
         "embed" : {
-            "hexColor" : "#6600ff",
+            "hexColor" : "#",
             "logo" : "https://image.url/logo.png"
         }
     },
