@@ -8,7 +8,8 @@ The bot is for the moment working only with [Soapbox Reloaded Core](https://gith
 The following configuration example will be generated in the file `local.settings.json` when you will run the bot for the first time.  
 Once the file generated the bot will ask you to fill **every** settings as your convenance.
 
-Make sure to check **commits** to see if a parameter has been added, if so you'll have to add the new line in the `local.settings.json` file.
+Make sure to check **commits** to see if a parameter has been added. 
+If a new parameter has been added you'll have to add the new line in the `local.settings.json` file.
 
 ```JSON
 {
