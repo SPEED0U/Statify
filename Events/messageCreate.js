@@ -1,4 +1,4 @@
-const settings = require("../settings.json");
+const settings = require("../settings.js");
 const prefix = settings.bot.prefix;
 const { MessageEmbed } = require('discord.js');
 let users = {}

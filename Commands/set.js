@@ -1,4 +1,4 @@
-const settings = require("../settings.json");
+const settings = require("../settings.js");
 const axios = require('axios');
 const commands = {
     repmultiplier,

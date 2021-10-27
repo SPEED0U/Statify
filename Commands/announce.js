@@ -1,4 +1,4 @@
-const settings = require("../settings.json");
+const settings = require("../settings.js");
 const axios = require('axios');
 const querystring = require('querystring')
 module.exports.run = (bot, message, args, con) => {

@@ -1,4 +1,4 @@
-const settings = require("../settings.json");
+const settings = require("../settings.js");
 const { MessageEmbed } = require('discord.js');
 
 module.exports.run = (bot, message, args, con) => {

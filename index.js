@@ -3,7 +3,7 @@ const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MES
 const fs = require('fs');
 bot.commands = new Collection();
 const mysql = require('mysql');
-const settings = require("./settings.json");
+const settings = require("./settings.js");
 var con = mysql.createConnection({
     host: settings.sql.host,
     user: settings.sql.user,

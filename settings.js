@@ -1,0 +1,1 @@
+exports.default = {...require("./settings.json"),...require("./local.settings.json")}

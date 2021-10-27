@@ -1,5 +1,5 @@
 const { MessageEmbed, MessageButton, MessageActionRow } = require('discord.js');
-const settings = require("../settings.json");
+const settings = require("../settings.js");
 module.exports.run = (bot, message, args, con) => {
     if (message.channel.id === settings.channel.command.public ||
         (message.member && message.member.roles.cache.find(r => r.id === settings.role.moderator))) {

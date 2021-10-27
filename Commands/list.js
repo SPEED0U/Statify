@@ -1,4 +1,4 @@
-const settings = require("../settings.json");
+const settings = require("../settings.js");
 module.exports.run = (bot, message, args, con) => {
     if (message.channel.id === settings.channel.command.admin && (message.member && message.member.roles.cache.find(r => r.id === settings.role.launcher || settings.role.admin))) {
         if (args[0] == "sha") {

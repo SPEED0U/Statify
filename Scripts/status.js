@@ -1,7 +1,7 @@
 const { MessageEmbed, Guild } = require('discord.js');
 const CronJob = require('cron').CronJob;
 const axios = require('axios');
-const settings = require("../settings.json");
+const settings = require("../settings.js");
 
 let countMaxOnline, datePlayerPeak, timestamp, date
 

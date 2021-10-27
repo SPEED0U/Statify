@@ -1,4 +1,4 @@
-const settings = require("../settings.json");
+const settings = require("../settings.js");
 const AmfPhp = async (url) => {
     const request = require("request");
     async function asyncRequest(url) {

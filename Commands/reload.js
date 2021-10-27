@@ -1,5 +1,5 @@
 const axios = require('axios');
-const settings = require("../settings.json");
+const settings = require("../settings.js");
 module.exports.run = (bot, message, args, con) => {
     if (message.channel.id === settings.channel.command.admin && (message.member && message.member.roles.cache.find(r => r.id === settings.role.admin || settings.role.launcher))) {
         axios.post(settings.core.url + '/Engine.svc/ReloadParameters', "adminAuth=" + settings.core.token.server, null).then(() => {

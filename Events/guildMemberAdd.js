@@ -1,4 +1,4 @@
-const settings = require("../settings.json");
+const settings = require("../settings.js");
 let x = {}
 module.exports = (client, con, member) => {
     if (settings.role.onArrival === true) {

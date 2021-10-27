@@ -1,4 +1,4 @@
-const settings = require("../settings.json");
+const settings = require("../settings.js");
 const { MessageEmbed } = require('discord.js');
 const axios = require('axios');
 const querystring = require('querystring')

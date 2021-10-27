@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js');
-const settings = require("../settings.json");
+const settings = require("../settings.js");
 
 module.exports.run = async (bot, message, args) => {
     const embed = new MessageEmbed()
