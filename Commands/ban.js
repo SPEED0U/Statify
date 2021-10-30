@@ -18,7 +18,7 @@ module.exports.run = (bot, message, args, con) => {
                             if (result1.length == 0) {
                                 con.query("INSERT INTO `BAN` (`id`, `ends_at`, `reason`, `started`, `banned_by_id`, `user_id`, `active`) VALUES (NULL, NULL, ?, NOW(), '273463', ?, 1)", [reason, userid], err => {
                                     con.query("UPDATE HARDWARE_INFO SET banned = 1 WHERE userId = " + userid)
-                                    axios.post(settings.core.url + '/Engine.svc/ofcmdhook?webhook=false&pid=273463&cmd=kick%20' + result[0].name, null, { headers: { Authorization: settings.core.token } }).then(res => { }).catch(error => { })
+                                    axios.post(settings.core.url + '/Engine.svc/ofcmdhook?webhook=false&pid=273463&cmd=kick%20' + result[0].name, null, { headers: { Authorization: settings.core.token.openfire } }).then(res => { }).catch(error => { })
                                     if (reason.length >= 1) {
                                         const post = querystring.stringify({
                                             message: `TXT_RED,[${result[0].name}] HAS BEEN PERMANENTLY BANNED.`,
