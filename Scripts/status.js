@@ -51,8 +51,8 @@ module.exports = (bot, con) => {
                 .setColor(settings.bot.embed.hexColor)
                 .setDescription("🟢 • Server is up and running.")
                 .addField('🌐 | __Online players__', json.onlineNumber.toString(), true)
-                .addField('🔖 | __Player peak__', countMaxOnline + " (" + datePlayerPeak + ")", true)
-                .addField('🎫 | __Registered players__', json.numberOfRegistered + "", true)
+                .addField('🔖 | __Player peak__', "**" + countMaxOnline + "** the " + datePlayerPeak + "", true)
+                .addField('🎫 | __Registered players__', Intl.NumberFormat('en-US').format(json.numberOfRegistered) + "", true)
                 if (json.cashRewardMultiplier <= 1 & json.repRewardMultiplier <= 1) {
                     embed.addField('📈 | __Multiplier__', "No multiplier active", true)
                 } else if (json.cashRewardMultiplier > 1 & json.repRewardMultiplier <= 1) {
@@ -65,7 +65,7 @@ module.exports = (bot, con) => {
                 
                 embed.addField('🕵 | __Admins__', "<@&" + settings.role.admin + ">", true)
                 .addField('👮 | __Moderators__', "<@&" + settings.role.moderator + ">", true)
-                    .addField('⏲️ | __Timezone__', 'CET (' + ('0' + new Date().getHours()).slice(-2) + ':' + ('0' + new Date().getMinutes()).slice(-2) + ')', true)
+                    .addField('⏲️ | __Timezone__', '[**CET**](https://time.is/fr/CET) [' + ('0' + new Date().getHours()).slice(-2) + ':' + ('0' + new Date().getMinutes()).slice(-2) + ']', true)
                     .addField('⏲️ | __Speedbug timer__', (json.secondsToShutDown / 60 / 60) + " hours", true)
                     .addField('⚙️ | __Server version__', json.serverVersion, true)
                     .setFooter(bot.user.tag, bot.user.displayAvatarURL())
@@ -99,7 +99,7 @@ module.exports = (bot, con) => {
                 .addField('📈 | __Multiplier__', "N/A", true)
                 .addField('🕵 | __Admins__', "<@&" + settings.role.admin + ">", true)
                 .addField('👮 | __Moderators__', "<@&" + settings.role.admin + ">", true)
-                .addField('⏲️ | __Timezone__', 'CET (' + ('0' + new Date().getHours()).slice(-2) + ':' + ('0' + new Date().getMinutes()).slice(-2) + ')', true)
+                .addField('⏲️ | __Timezone__', '[CET](https://time.is/fr/CET) [' + ('0' + new Date().getHours()).slice(-2) + ':' + ('0' + new Date().getMinutes()).slice(-2) + ']', true)
                 .addField('⏲️ | __Speedbug timer__', "N/A", true)
                 .addField('⚙️ | __Server version__', "N/A", true)
                 .setFooter("Last update")
