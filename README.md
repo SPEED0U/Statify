@@ -65,6 +65,7 @@ If a new parameter has been added you'll have to add the new line in the `local.
         "url" : "http://url.ofyour.core:8080",
         "maxPlayerAnnounceLobby" : "",
         "announceLobbies" : true,
+        "timezone" : "CET",
         "token" : {
             "server" : "",
             "openfire" : ""
@@ -123,6 +124,7 @@ Core configuration
 - `core.token.server`, the admin token of your server.
 - `core.token.openfire`, the openfire token of your server.
 - `core.announceLobbies`, enable or disable (`true` or `false`) the lobby announcements in chat managed by the bot.
+- `core.timezone`, the current timezone of your server. See [this website](https://24timezones.com/time-zones) to know the list of timezones.
 
 Database configuration
 - `sql.host`, the host IP of your mysql server.
