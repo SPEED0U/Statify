@@ -65,7 +65,7 @@ module.exports = (bot, con) => {
                 
                 embed.addField('🕵 | __Admins__', "<@&" + settings.role.admin + ">", true)
                 .addField('👮 | __Moderators__', "<@&" + settings.role.moderator + ">", true)
-                    .addField('⏲️ | __Timezone__', '[**CET**](https://time.is/fr/CET) [' + ('0' + new Date().getHours()).slice(-2) + ':' + ('0' + new Date().getMinutes()).slice(-2) + ']', true)
+                    .addField('⏲️ | __Timezone__', '[' + settings.core.timezone + '](https://time.is/' + settings.core.timezone + ') [' + ('0' + new Date().getHours()).slice(-2) + ':' + ('0' + new Date().getMinutes()).slice(-2) + ']', true)
                     .addField('⏲️ | __Speedbug timer__', (json.secondsToShutDown / 60 / 60) + " hours", true)
                     .addField('⚙️ | __Server version__', json.serverVersion, true)
                     .setFooter(bot.user.tag, bot.user.displayAvatarURL())

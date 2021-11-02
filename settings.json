@@ -47,6 +47,7 @@
         "url" : "http://url.ofyour.core:8080",
         "maxPlayerAnnounceLobby" : "",
         "announceLobbies" : true,
+        "timezone" : "CET",
         "token" : {
             "server" : "",
             "openfire" : ""
