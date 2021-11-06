@@ -22,7 +22,8 @@ function convertToIntervalTime(date) {
 module.exports.run = (bot, message, args, con) => {
     if (message.channel.id === settings.channel.command.admin || message.channel.id === settings.channel.command.moderator && (message.member && message.member.roles.cache.find(r => r.id === settings.role.moderator))) {
         if (args[1].match(/^([0-9]+)(d|m|y|w)$/)) {
-            con.query("SELECT USERID, ID, iconIndex, name FROM PERSONA WHERE name = ?", [args[0]], (err, result) => {
+            con.query("SELECT USERID, ID, iconIndex, name FROM PERSONA WHERE name = ?", [args[0]], (err, result) =>
+            con.query("SELECT gameHardwareHash FROM USER WHERE id = " + userid), (err, userInfo) => {
                 if (err) {
                     message.channel.send("Failed to execute command: " + err);
                 } else {
@@ -42,7 +43,7 @@ module.exports.run = (bot, message, args, con) => {
                         con.query("SELECT * FROM BAN WHERE user_id = " + userid + " AND active = 1", (err, result1) => {
                                 if (result1.length == 0) {
                                     con.query("INSERT INTO `BAN` (`id`, `ends_at`, `reason`, `started`, `banned_by_id`, `user_id`, `active`) VALUES (NULL, " + convertToIntervalTime(args[1]) + ", ?, NOW(), '273463', ?, 1)", [reason, userid], err => {
-                                        con.query("UPDATE HARDWARE_INFO SET banned = 1 WHERE userId = " + userid)
+                                        con.query("UPDATE HARDWARE_INFO SET banned = 1 WHERE userId = " + userid + " AND hardwareHash = " + userInfo[0].ghh)
                                         axios.post(settings.core.url + '/Engine.svc/ofcmdhook?webhook=false&pid=273463&cmd=kick%20' + result[0].name, null, { headers: { Authorization: settings.core.token.openfire } }).then(res => { }).catch(error => { })
                                         if (!err) {
                                             const post = querystring.stringify({

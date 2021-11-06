@@ -11,11 +11,12 @@ module.exports.run = (bot, message, args, con) => {
                     var userid = result[0].USERID;
                     var icon = result[0].iconIndex + settings.url.avatarFormat
                     var reason = message.content.replace("s!unban", '').replace(args[0], '').trim();
+                    con.query("SELECT gameHardwareHash FROM USER WHERE id = " + userid), (err, userInfo) =>
                     con.query("SELECT * FROM BAN WHERE user_id = " + userid + " AND active = 1", (err, result1) =>
                         con.query("SELECT * FROM HARDWARE_INFO WHERE userId = " + userid + " AND banned = 1", (err, result2) => {
                             if (result1.length > 0 || result2.length > 0) {
                                 con.query("UPDATE BAN SET active = 0 WHERE user_id = " + userid); {
-                                    con.query("UPDATE HARDWARE_INFO SET banned = 0 WHERE userId = " + userid)
+                                    con.query("UPDATE HARDWARE_INFO SET banned = 0 WHERE userId = " + userid + " AND hardwareHash = " + userInfo[0].ghh)
                                     if (reason.length > 0) {
                                         const embed = new MessageEmbed()
                                         .setAuthor(result[0].name + " has been unbanned.", settings.url.avatarEndpoint + icon)
