@@ -22,8 +22,7 @@ function convertToIntervalTime(date) {
 module.exports.run = (bot, message, args, con) => {
     if (message.channel.id === settings.channel.command.admin || message.channel.id === settings.channel.command.moderator && (message.member && message.member.roles.cache.find(r => r.id === settings.role.moderator))) {
         if (args[1].match(/^([0-9]+)(d|m|y|w)$/)) {
-            con.query("SELECT USERID, ID, iconIndex, name FROM PERSONA WHERE name = ?", [args[0]], (err, result) =>
-            con.query("SELECT gameHardwareHash AS ghh FROM USER WHERE id = " + [args[0]].USERID, (err, userInfo) => {
+            con.query("SELECT USERID, ID, iconIndex, name FROM PERSONA WHERE name = ?", [args[0]], (err, result) => {
                 if (err) {
                     message.channel.send("Failed to execute command: " + err);
                 } else {
@@ -39,7 +38,7 @@ module.exports.run = (bot, message, args, con) => {
                             y: "year(s)",
                             m: "month(s)"
                         }
-
+                        con.query("SELECT gameHardwareHash AS ghh FROM USER WHERE ID = ?", [userid], (err, userInfo) =>
                         con.query("SELECT * FROM BAN WHERE user_id = " + userid + " AND active = 1", (err, result1) => {
                                 if (result1.length == 0) {
                                     con.query("INSERT INTO `BAN` (`id`, `ends_at`, `reason`, `started`, `banned_by_id`, `user_id`, `active`) VALUES (NULL, " + convertToIntervalTime(args[1]) + ", ?, NOW(), '273463', ?, 1)", [reason, userid], err => {
@@ -83,12 +82,12 @@ module.exports.run = (bot, message, args, con) => {
                                 else {
                                     message.channel.send("**" + result[0].name + "** already have an active ban.")
                                 }
-                            })
+                            }))
                     } else {
                         message.channel.send("Driver **+" + result[0].name + "** not found.");
                     }
                 }
-            }))
+            });
         } else {
             message.channel.send("Unknown unit or format, the available units are `d`, `w`, `m` and `y`.\nExemple of usage for a **5 day** ban: `" + settings.bot.prefix + "tempban [DRIVER] 5d [REASON]`")
         }
