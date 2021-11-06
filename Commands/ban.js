@@ -11,7 +11,7 @@ module.exports.run = (bot, message, args, con) => {
             } else {
                 if (result.length > 0) {
                     var userid = result[0].USERID;
-                    var icon = result[0].iconIndex + ".jpg"
+                    var icon = result[0].iconIndex + settings.url.avatarFormat
                     var reason = message.content.replace("s!ban", '').replace(args[0], '').trim();
                     console.log(
                     con.query("SELECT gameHardwareHash AS ghh FROM USER WHERE ID = ?", [userid], (err, userInfo) =>
