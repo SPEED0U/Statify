@@ -23,7 +23,7 @@ module.exports.run = (bot, message, args, con) => {
     if (message.channel.id === settings.channel.command.admin || message.channel.id === settings.channel.command.moderator && (message.member && message.member.roles.cache.find(r => r.id === settings.role.moderator))) {
         if (args[1].match(/^([0-9]+)(d|m|y|w)$/)) {
             con.query("SELECT USERID, ID, iconIndex, name FROM PERSONA WHERE name = ?", [args[0]], (err, result) =>
-            con.query("SELECT gameHardwareHash FROM USER WHERE id = " + userid), (err, userInfo) => {
+            con.query("SELECT gameHardwareHash AS ghh FROM USER WHERE id = " + userid), (err, userInfo) => {
                 if (err) {
                     message.channel.send("Failed to execute command: " + err);
                 } else {

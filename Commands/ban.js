@@ -14,7 +14,7 @@ module.exports.run = (bot, message, args, con) => {
                     var icon = result[0].iconIndex + ".jpg"
                     var reason = message.content.replace("s!ban", '').replace(args[0], '').trim();
 
-                    con.query("SELECT gameHardwareHash FROM USER WHERE id = " + userid), (err, userInfo) =>
+                    con.query("SELECT gameHardwareHash AS ghh FROM USER WHERE id = " + userid), (err, userInfo) =>
                     con.query("SELECT * FROM BAN WHERE user_id = " + userid + " AND active = 1", (err, result1) => {
                             if (result1.length == 0) {
                                 con.query("INSERT INTO `BAN` (`id`, `ends_at`, `reason`, `started`, `banned_by_id`, `user_id`, `active`) VALUES (NULL, NULL, ?, NOW(), '273463', ?, 1)", [reason, userid], err => {

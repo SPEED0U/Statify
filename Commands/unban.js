@@ -11,7 +11,7 @@ module.exports.run = (bot, message, args, con) => {
                     var userid = result[0].USERID;
                     var icon = result[0].iconIndex + settings.url.avatarFormat
                     var reason = message.content.replace("s!unban", '').replace(args[0], '').trim();
-                    con.query("SELECT gameHardwareHash FROM USER WHERE id = " + userid), (err, userInfo) =>
+                    con.query("SELECT gameHardwareHash AS ghh FROM USER WHERE id = " + userid), (err, userInfo) =>
                     con.query("SELECT * FROM BAN WHERE user_id = " + userid + " AND active = 1", (err, result1) =>
                         con.query("SELECT * FROM HARDWARE_INFO WHERE userId = " + userid + " AND banned = 1", (err, result2) => {
                             if (result1.length > 0 || result2.length > 0) {
