@@ -13,12 +13,12 @@ module.exports.run = (bot, message, args, con) => {
                     var userid = result[0].USERID;
                     var icon = result[0].iconIndex + ".jpg"
                     var reason = message.content.replace("s!ban", '').replace(args[0], '').trim();
-
-                    con.query("SELECT gameHardwareHash AS ghh FROM USER WHERE id = " + userid), (err, userInfo) =>
+                    console.log(
+                    con.query("SELECT gameHardwareHash AS ghh FROM USER WHERE ID = ?", [userid], (err, userInfo) =>
                     con.query("SELECT * FROM BAN WHERE user_id = " + userid + " AND active = 1", (err, result1) => {
                             if (result1.length == 0) {
                                 con.query("INSERT INTO `BAN` (`id`, `ends_at`, `reason`, `started`, `banned_by_id`, `user_id`, `active`) VALUES (NULL, NULL, ?, NOW(), '273463', ?, 1)", [reason, userid], err => {
-                                    con.query("UPDATE HARDWARE_INFO SET banned = 1 WHERE userId = " + userid + " AND hardwareHash = " + userInfo[0].ghh)
+                                    con.query("UPDATE HARDWARE_INFO SET banned = 1 WHERE userId = ? AND hardwareHash = ?", [userid,userInfo[0].ghh]), (err)
                                     axios.post(settings.core.url + '/Engine.svc/ofcmdhook?webhook=false&pid=273463&cmd=kick%20' + result[0].name, null, { headers: { Authorization: settings.core.token.openfire } }).then(res => { }).catch(error => { })
                                     if (reason.length >= 1) {
                                         const post = querystring.stringify({
@@ -64,7 +64,7 @@ module.exports.run = (bot, message, args, con) => {
                                 message.channel.send("**" + result[0].name + "** already have an active ban.")
                             }
                         })
-
+                    ))
                 } else {
                     message.channel.send("Driver **+" + args[0].toUpperCase() + "** not found.");
                 }

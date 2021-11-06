@@ -11,9 +11,9 @@ module.exports.run = (bot, message, args, con) => {
                     var userid = result[0].USERID;
                     var icon = result[0].iconIndex + settings.url.avatarFormat
                     var reason = message.content.replace("s!unban", '').replace(args[0], '').trim();
-                    con.query("SELECT gameHardwareHash AS ghh FROM USER WHERE id = " + userid), (err, userInfo) =>
+                    con.query("SELECT gameHardwareHash AS ghh FROM USER WHERE ID = ?", [userid], (err, userInfo) =>
                     con.query("SELECT * FROM BAN WHERE user_id = " + userid + " AND active = 1", (err, result1) =>
-                        con.query("SELECT * FROM HARDWARE_INFO WHERE userId = " + userid + " AND banned = 1", (err, result2) => {
+                    con.query("UPDATE HARDWARE_INFO SET banned = 1 WHERE userId = ? AND hardwareHash = ?", [userid,userInfo[0].ghh], (err, result2) => {
                             if (result1.length > 0 || result2.length > 0) {
                                 con.query("UPDATE BAN SET active = 0 WHERE user_id = " + userid); {
                                     con.query("UPDATE HARDWARE_INFO SET banned = 0 WHERE userId = " + userid + " AND hardwareHash = " + userInfo[0].ghh)
@@ -43,7 +43,7 @@ module.exports.run = (bot, message, args, con) => {
                             else {
                                 message.channel.send("The driver **" + args[0] + "** doesn't have any active ban.")
                             }
-                        }))
+                        })))
 
                 } else {
                     message.channel.send("Driver **+" + args[0] + "** not found.");
