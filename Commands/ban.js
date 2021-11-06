@@ -13,7 +13,6 @@ module.exports.run = (bot, message, args, con) => {
                     var userid = result[0].USERID;
                     var icon = result[0].iconIndex + settings.url.avatarFormat
                     var reason = message.content.replace("s!ban", '').replace(args[0], '').trim();
-                    console.log(
                     con.query("SELECT gameHardwareHash AS ghh FROM USER WHERE ID = ?", [userid], (err, userInfo) =>
                     con.query("SELECT * FROM BAN WHERE user_id = " + userid + " AND active = 1", (err, result1) => {
                             if (result1.length == 0) {
@@ -64,7 +63,7 @@ module.exports.run = (bot, message, args, con) => {
                                 message.channel.send("**" + result[0].name + "** already have an active ban.")
                             }
                         })
-                    ))
+                    )
                 } else {
                     message.channel.send("Driver **+" + args[0].toUpperCase() + "** not found.");
                 }
