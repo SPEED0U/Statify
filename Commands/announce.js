@@ -15,7 +15,7 @@ module.exports.run = (bot, message, args, con) => {
         axios.post(settings.core.url + '/Engine.svc/Send/Announcement', post, config).then(res2 => {
             const embed = new MessageEmbed()
                 .setAuthor("Chat announcement", bot.user.displayAvatarURL())
-                .setColor(color.replace("TXT_",""))
+                .setColor(color.replace("TXT_","").toUpperCase())
                 .addField("Message", announcement)
                 .addField("Context", capitalizeFirstLetter(prefix))
                 .addField("Initiator", "<@" + message.author.id + ">")
