@@ -84,7 +84,7 @@ module.exports.run = (bot, message, args, con) => {
                                 }
                             }))
                     } else {
-                        message.channel.send("Driver **+" + result[0].name + "** not found.");
+                        message.channel.send("Driver **" + args[0] + "** not found.");
                     }
                 }
             });
