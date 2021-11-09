@@ -23,7 +23,7 @@ module.exports.run = (bot, message, args, con) => {
                         .addField("Last connection", "`" + lastlog.toLocaleString('en-GB', { timeZone: 'Europe/Paris', hour12: false }) + "`")
                         .addField("Hardware hash", "`" + ghh.toUpperCase() + "`")
                         .addField("IP address", "`" + ip + "`")
-                        .addField("Acount state", locked === 1 ? "`Locked`" : "`Unlocked`")
+                        .addField("Account state", locked === 1 ? "`Locked`" : "`Unlocked`")
                         .setFooter(bot.user.tag, bot.user.displayAvatarURL())
                         .setTimestamp()
                     message.channel.send({ embeds: [embed] })

@@ -4,13 +4,7 @@ const fs = require('fs');
 bot.commands = new Collection();
 const mysql = require('mysql');
 const settings = require("./settings.js");
-var con = mysql.createConnection({
-    host: settings.sql.host,
-    user: settings.sql.user,
-    password: settings.sql.password,
-    database: settings.sql.database
-});
-
+var con = mysql.createConnection(settings.sql);
 
 // Token du bot pour qu'il se connecte au serveur discord.
 bot.login(settings.bot.token)

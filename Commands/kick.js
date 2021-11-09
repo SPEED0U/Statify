@@ -15,7 +15,7 @@ module.exports.run = (bot, message, args, con) => {
                 var icon = result[0].iconIndex + settings.url.avatarFormat
                 const config = { headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' } };
                 axios.post(settings.core.url + '/Engine.svc/Send/Announcement', post, config)
-                axios.post(settings.core.url + '/Engine.svc/ofcmdhook?webhook=false&pid=273463&cmd=kick%20' + result[0].name, null, { headers: { Authorization: settings.core.token.openfire } }).then(res => { }).catch(error => { })
+                axios.post(settings.core.url + '/Engine.svc/ofcmdhook?webhook=false&pid=' + settings.core.botPersonaId + '&cmd=kick%20' + result[0].name, null, { headers: { Authorization: settings.core.token.openfire } }).then(res => { }).catch(error => { })
                 if (reason.length > 0) {
                     const embed = new MessageEmbed()
                     .setAuthor(result[0].name + " has been kicked.", settings.url.avatarEndpoint + icon)

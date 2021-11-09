@@ -51,7 +51,8 @@
         "token" : {
             "server" : "",
             "openfire" : ""
-        }
+        },
+        "botPersonaId": 0
     },
 
     "sql" : {
