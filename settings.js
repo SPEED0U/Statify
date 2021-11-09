@@ -12,6 +12,7 @@ const mergeJSON = function (target, add) {
     }
     for (var key in add) {
         if (add.hasOwnProperty(key)) {
+            if (key === "__proto__" || key === "constructor") continue;
             if (target[key] && isObject(target[key]) && isObject(add[key])) {
                 mergeJSON(target[key], add[key]);
             } else {
