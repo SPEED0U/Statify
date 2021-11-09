@@ -1,16 +1,14 @@
 const settings = require("../settings.js");
 const axios = require('axios');
-const querystring = require('querystring');
 const { MessageEmbed } = require('discord.js');
 module.exports.run = (bot, message, args, con) => {
     if (message.channel.id === settings.channel.command.admin && (message.member.roles.cache.find(r => r.id === settings.role.moderator))) {
         const color = args.shift();
         const prefix = args.shift();
         const announcement = args.join(" ");
-        const post = querystring.stringify({
-            message: `TXT_${color.toUpperCase()},[${prefix}] ${announcement}`,
-            announcementAuth: settings.core.token.server
-        })
+        const post = new URLSearchParams();
+        post.append('message', `TXT_${color.toUpperCase()},[${prefix}] ${announcement}`);
+        post.append('announcementAuth', settings.core.token.server);
         const config = { headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' } };
         axios.post(settings.core.url + '/Engine.svc/Send/Announcement', post, config).then(res2 => {
             const embed = new MessageEmbed()

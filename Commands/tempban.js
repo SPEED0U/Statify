@@ -1,7 +1,6 @@
 const settings = require("../settings.js");
 const axios = require('axios');
 const { MessageEmbed } = require('discord.js');
-const querystring = require('querystring')
 
 function convertToIntervalTime(date) {
     var suffix = date.split('').pop();
@@ -45,10 +44,9 @@ module.exports.run = (bot, message, args, con) => {
                                         con.query("UPDATE HARDWARE_INFO SET banned = 1 WHERE userId = ? AND hardwareHash = ?", [userid,userInfo[0].ghh]), (err)
                                         axios.post(settings.core.url + '/Engine.svc/ofcmdhook?webhook=false&pid=' + settings.core.botPersonaId + '&cmd=kick%20' + result[0].name, null, { headers: { Authorization: settings.core.token.openfire } }).then(res => { }).catch(error => { })
                                         if (!err) {
-                                            const post = querystring.stringify({
-                                                message: `TXT_RED,[${result[0].name}] HAS BEEN TEMPORARILY BANNED FOR` + nosuffix.toUpperCase() + " " + units[durationsuffix].toUpperCase() + ".",
-                                                announcementAuth: settings.core.token.server
-                                            })
+                                            const post = new URLSearchParams();
+                                            post.append('message', `TXT_RED,[${result[0].name}] HAS BEEN TEMPORARILY BANNED FOR` + nosuffix.toUpperCase() + " " + units[durationsuffix].toUpperCase() + ".");
+                                            post.append('announcementAuth', settings.core.token.server);
                                             const config = { headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' } };
                                             axios.post(settings.core.url + '/Engine.svc/Send/Announcement', post, config)
                                             if (reason.length > 0) {

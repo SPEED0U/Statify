@@ -1,16 +1,14 @@
 const settings = require("../settings.js");
 const axios = require('axios');
 const { MessageEmbed } = require('discord.js');
-const querystring = require('querystring')
 
 module.exports.run = (bot, message, args, con) => {
     if (message.channel.id === settings.channel.command.admin || message.channel.id === settings.channel.command.moderator && (message.member && message.member.roles.cache.find(r => r.id === settings.role.moderator))) {
         con.query("SELECT USERID, ID, name, iconIndex FROM PERSONA WHERE name = ?", [args[0].toUpperCase()], (err, result) => {
             if (result.length == 1) {
-                const post = querystring.stringify({
-                    message: `TXT_ORANGE,[${result[0].name}] HAS BEEN KICKED.`,
-                    announcementAuth: settings.core.token.server
-                })
+                const post = new URLSearchParams();
+                post.append('message', `TXT_ORANGE,[${result[0].name}] HAS BEEN KICKED.`);
+                post.append('announcementAuth', settings.core.token.server);
                 var reason = message.content.replace("s!kick", '').replace(args[0], '').trim();
                 var icon = result[0].iconIndex + settings.url.avatarFormat
                 const config = { headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' } };

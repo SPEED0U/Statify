@@ -1,7 +1,6 @@
 const settings = require("../settings.js");
 const { MessageEmbed } = require('discord.js');
 const axios = require('axios');
-const querystring = require('querystring')
 
 module.exports.run = (bot, message, args, con) => {
     if (message.channel.id === settings.channel.command.admin || message.channel.id === settings.channel.command.moderator && (message.member && message.member.roles.cache.find(r => r.id === settings.role.moderator))) {
@@ -20,10 +19,9 @@ module.exports.run = (bot, message, args, con) => {
                                     con.query("UPDATE HARDWARE_INFO SET banned = 1 WHERE userId = ? AND hardwareHash = ?", [userid,userInfo[0].ghh]), (err)
                                     axios.post(settings.core.url + '/Engine.svc/ofcmdhook?webhook=false&pid=' + settings.core.botPersonaId + '&cmd=kick%20' + result[0].name, null, { headers: { Authorization: settings.core.token.openfire } }).then(res => { }).catch(error => { })
                                     if (reason.length >= 1) {
-                                        const post = querystring.stringify({
-                                            message: `TXT_RED,[${result[0].name}] HAS BEEN PERMANENTLY BANNED.`,
-                                            announcementAuth: settings.core.token.server
-                                        })
+                                        const post = new URLSearchParams();
+                                        post.append('message', `TXT_RED,[${result[0].name}] HAS BEEN PERMANENTLY BANNED.`);
+                                        post.append('announcementAuth', settings.core.token.server);
                                         const config = { headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' } };
                                         axios.post(settings.core.url + '/Engine.svc/Send/Announcement', post, config)
                                         if (!err) {
@@ -37,12 +35,10 @@ module.exports.run = (bot, message, args, con) => {
                                             bot.channels.cache.get(settings.channel.banlogs).send({ embeds: [embed] })
                                             message.channel.send({ embeds: [embed] })
                                         }
-                                    }
-                                    else {
-                                        const post = querystring.stringify({
-                                            message: `TXT_RED,${result[0].name} HAS BEEN PERMANENTLY BANNED.`,
-                                            announcementAuth: settings.core.token.server
-                                        })
+                                    } else {
+                                        const post = new URLSearchParams();
+                                        post.append('message', `TXT_RED,[${result[0].name}] HAS BEEN PERMANENTLY BANNED.`);
+                                        post.append('announcementAuth', settings.core.token.server);
                                         const config = { headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' } };
                                         axios.post(settings.core.url + '/Engine.svc/Send/Announcement', post, config).then(result2)
                                         if (!err) {
