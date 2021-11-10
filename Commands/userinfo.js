@@ -12,23 +12,32 @@ module.exports.run = (bot, message, args, con) => {
                 var accCreation = uid[0].created
                 var icon = pid[0].iconIndex + settings.url.avatarFormat
                 var userId = uid[0].ID
-                if (pid.length > 0) {
-                    const embed = new MessageEmbed()
-                        .setAuthor("Account information of " + args[0].toUpperCase(), settings.url.avatarEndpoint + icon)
-                        .setThumbnail(settings.url.avatarEndpoint + icon, true)
-                        .setColor("#ff0000")
-                        .addField("Email", "`" + email + "`")
-                        .addField("Account ID", "`" + userId + "`")
-                        .addField("Account creation date", "`" + accCreation.toLocaleString('en-GB', { timeZone: 'Europe/Paris', hour12: false }) + "`")
-                        .addField("Last connection", "`" + lastlog.toLocaleString('en-GB', { timeZone: 'Europe/Paris', hour12: false }) + "`")
-                        .addField("Hardware hash", "`" + ghh.toUpperCase() + "`")
-                        .addField("IP address", "`" + ip + "`")
-                        .addField("Account state", locked === 1 ? "`Locked`" : "`Unlocked`")
-                        .setFooter(bot.user.tag, bot.user.displayAvatarURL())
-                        .setTimestamp()
-                    message.channel.send({ embeds: [embed] })
-                } else message.channel.send("Driver **" + args[0] + "** not found.")
-                
+                var premium = uid[0].premium
+                con.query("SELECT name FROM PERSONA WHERE USERID = ?", [userId], (err, drivers) => {
+                    var attachedDrivers = []
+                    for(driver of drivers) {
+                        attachedDrivers.push(driver.name)
+                    }
+                    if (pid.length > 0) {
+                        const embed = new MessageEmbed()
+                            .setAuthor("Account information of " + args[0].toUpperCase(), settings.url.avatarEndpoint + icon)
+                            .setThumbnail(settings.url.avatarEndpoint + icon, true)
+                            .setColor("#ff0000")
+                            .addField("Email", "`" + email + "`")
+                            .addField("Account ID", "`" + userId + "`")
+                            .addField("Account creation date", "`" + accCreation.toLocaleString('en-GB', { timeZone: "Europe/Paris", hour12: false }) + "`")
+                            .addField("Last connection", "`" + lastlog.toLocaleString('en-GB', { timeZone: "Europe/Paris", hour12: false }) + "`")
+                            .addField("Membership", premium === 1 ? "`Premium`" : "`Freemium`")
+                            .addField("Attached drivers", "`" + attachedDrivers.join(", ") + "`")
+                            .addField("Hardware hash", "`" + ghh.toUpperCase() + "`")
+                            .addField("IP address", "`" + ip + "`")
+                            .addField("Account state", locked === 1 ? "`Locked`" : "`Unlocked`")
+                            .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                            .setTimestamp()
+                        message.channel.send({ embeds: [embed] })
+                    } else message.channel.send("Driver **" + args[0] + "** not found.")
+                    
+                })                
             })
         })
     }
