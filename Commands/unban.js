@@ -16,7 +16,7 @@ module.exports.run = (bot, message, args, con) => {
                     con.query("UPDATE HARDWARE_INFO SET banned = 1 WHERE userId = ? AND hardwareHash = ?", [userid,userInfo[0].ghh], (err, result2) => {
                             if (result1.length > 0 || result2.length > 0) {
                                 con.query("UPDATE BAN SET active = 0 WHERE user_id = " + userid); {
-                                    con.query("UPDATE HARDWARE_INFO SET banned = 0 WHERE userId = " + userid + " AND hardwareHash = " + userInfo[0].ghh)
+                                    con.query("UPDATE HARDWARE_INFO SET banned = 0 WHERE userId = " + userid + " AND hardwareHash = '" + userInfo[0].ghh + "'")
                                     if (reason.length > 0) {
                                         const embed = new MessageEmbed()
                                         .setAuthor(result[0].name + " has been unbanned.", settings.url.avatarEndpoint + icon)
