@@ -61,7 +61,7 @@ module.exports.run = (bot, message, args, con) => {
                         })
                     )
                 } else {
-                    message.channel.send("Driver **+" + args[0].toUpperCase() + "** not found.");
+                    message.channel.send("Driver **" + args[0].toUpperCase() + "** not found.");
                 }
             }
         });
