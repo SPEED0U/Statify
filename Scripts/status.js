@@ -61,6 +61,8 @@ module.exports = (bot, con) => {
                     embed.addField('📈 | __Multiplier__', "Reputation **X" + (json.repRewardMultiplier) + "**", true)
                 } else if (json.cashRewardMultiplier > 1 & json.repRewardMultiplier > 1) {
                     embed.addField('📈 | __Multiplier__', "Cash & Rep **X" + (json.cashRewardMultiplier) + "**", true)
+                } else if (json.cashRewardMultiplier != json.repRewardMultiplier && json.repRewardMultiplier > 1 || json.cashRewardMultiplier > 1) {
+                    embed.addField('📈 | __Multiplier__', "Cash **X" + (json.cashRewardMultiplier) + "**, Rep **X" + (json.repRewardMultiplier) + "**", true)
                 }
                 
                 embed.addField('🕵 | __Admins__', "<@&" + settings.role.admin + ">", true)
