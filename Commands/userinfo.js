@@ -2,7 +2,7 @@ const settings = require("../settings.js");
 const { MessageEmbed } = require('discord.js');
 module.exports.run = (bot, message, args, con) => {
     if ((message.channel.id === settings.channel.command.admin || message.channel.id === settings.channel.command.moderator) && (message.member && message.member.roles.cache.find(r => r.id === settings.role.moderator))) {
-        con.query("SELECT USER.EMAIL, USER.gameHardwareHash, USER.IP_ADDRESS, USER.lastLogin, USER.isLocked, USER.created, USER.ID as UID, PERSONA.ID as PID, PERSONA.iconIndex USER INNER JOIN PERSONA ON PERSONA.USERID = PERSONA.ID WHERE PERSONA.NAME = ?", [args[0]], (err, userinfo) => {
+        con.query("SELECT USER.EMAIL, USER.gameHardwareHash, USER.IP_ADDRESS, USER.lastLogin, USER.isLocked, USER.created, USER.ID as UID, PERSONA.ID as PID, PERSONA.iconIndex FROM USER INNER JOIN PERSONA ON PERSONA.USERID = PERSONA.ID WHERE PERSONA.NAME = ?", [args[0]], (err, userinfo) => {
             if (userinfo.length > 0) {
                 con.query("SELECT name FROM PERSONA WHERE USERID = ?", [userinfo[0].UID], (err, drivers) => {
                     var attachedDrivers = []
