@@ -87,7 +87,7 @@ module.exports.run = (bot, message, args, con) => {
                 }
             });
         } else {
-            message.channel.send("Unknown unit or format, the available units are `d`, `w`, `m` and `y`.\nExemple of usage for a **5 day** ban: `" + settings.bot.prefix + "tempban [DRIVER] 5d [REASON]`")
+            message.channel.send("Unknown unit or format, the available units are `d`, `w`, `m` and `y`.\nExample of usage for a **5 day** ban: `" + settings.bot.prefix + "tempban [DRIVER] 5d [REASON]`")
         }
     }
 }
