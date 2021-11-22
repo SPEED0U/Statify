@@ -6,10 +6,8 @@ const mysql = require('mysql');
 const settings = require("./settings.js");
 var con = mysql.createConnection(settings.sql);
 
-// Token du bot pour qu'il se connecte au serveur discord.
 bot.login(settings.bot.token)
 bot.on("ready", function() {
-    // Importation du fichier : Events.
     fs.readdir('./Events/', (error, f) => {
             if (error) { return console.error(error); }
             console.log(`${f.length} events loaded.`);
@@ -20,7 +18,6 @@ bot.on("ready", function() {
                 bot.on(event, events.bind(null, bot, con));
             });
         })
-        // Importation des scripts
     fs.readdir('./Scripts/', (error, f) => {
             if (error) { return console.error(error); }
             console.log(`${f.length} script loaded.`);
@@ -30,16 +27,15 @@ bot.on("ready", function() {
                 events(bot, con);
             });
         })
-        /// Importation du fichier : Commandes/.
     fs.readdir("./Commands/", (error, f) => {
         if (error) { return console.error(error); }
-        let commandes = f.filter(f => f.split(".").pop() === "js");
-        if (commandes.length <= 0) { return console.log("No command found."); }
+        let commands = f.filter(f => f.split(".").pop() === "js");
+        if (commands.length <= 0) { return console.log("No command found."); }
 
-        commandes.forEach((f) => {
-            let commande = require(`./Commands/${f}`);
-            console.log(`${f} command loaded.`);
-            bot.commands.set(commande.help.name, commande);
+        commands.forEach((f) => {
+            let command = require(`./Commands/${f}`);
+            console.log("Successfully loaded " + commands);
+            bot.commands.set(command.help.name, command);
         });
     });
 })
