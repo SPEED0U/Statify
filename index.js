@@ -9,18 +9,18 @@ var con = mysql.createConnection(settings.sql);
 bot.login(settings.bot.token)
 bot.on("ready", function() {
     fs.readdir('./Events/', (error, f) => {
-            if (error) { return console.error(error); }
-            console.log(`${f.length} events loaded.`);
-
-            f.forEach((f) => {
-                let events = require(`./Events/${f}`);
-                let event = f.split('.')[0];
-                bot.on(event, events.bind(null, bot, con));
+        if (error) { return console.error(error); }
+        
+        f.forEach((f) => {
+            let events = require(`./Events/${f}`);
+            let event = f.split('.')[0];
+            bot.on(event, events.bind(null, bot, con));
+            console.log("Loaded " + f + " event.");
             });
         })
     fs.readdir('./Scripts/', (error, f) => {
             if (error) { return console.error(error); }
-            console.log(`${f.length} script loaded.`);
+            console.log("Loaded " + f + " script.");
 
             f.forEach((f) => {
                 let events = require(`./Scripts/${f}`);
@@ -34,7 +34,7 @@ bot.on("ready", function() {
 
         commands.forEach((f) => {
             let command = require(`./Commands/${f}`);
-            console.log("Successfully loaded " + commands);
+            console.log("Loaded " + f + " command.");
             bot.commands.set(command.help.name, command);
         });
     });
