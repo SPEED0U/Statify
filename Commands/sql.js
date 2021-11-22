@@ -41,5 +41,9 @@ module.exports.run = (bot, message, args, con) => {
 }
 
 module.exports.help = {
-    name: "sql"
+    name: "sql",
+    description: ["Proceed a SQL request on the database."],
+    category: "Administrator",
+    args: "[request]",
+    roles: [settings.role.admin] 
 };

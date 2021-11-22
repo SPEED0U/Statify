@@ -18,9 +18,6 @@ module.exports.run = (bot, message, args, con) => {
     }
 };
 
-module.exports.help = {
-    name: "set"
-};
 
 function repmultiplier(bot, message, args, con) {
     con.query("UPDATE PARAMETER SET value = ? WHERE name = 'REP_REWARD_MULTIPLIER'", [args[1]], err => {
@@ -48,36 +45,44 @@ function modsversion(bot, message, args, con) {
 }
 
 function scenery(bot, message, args, con) {
-    switch(args[1].toLowerCase()) {
+    switch (args[1].toLowerCase()) {
         case "fireworks":
             con.query("UPDATE PARAMETER SET value = 'SCENERY_GROUP_NEWYEARS' WHERE name = 'SERVER_INFO_ENABLED_SCENERY'")
             con.query("UPDATE PARAMETER SET value = 'SCENERY_GROUP_NEWYEARS_DISABLED' WHERE name = 'SERVER_INFO_DISABLED_SCENERY'")
             axios.post(settings.core.url + '/Engine.svc/ReloadParameters', "adminAuth=" + settings.core.token.server, null)
             message.channel.send(":fireworks: • Enabled **" + args[1] + "** scenery.")
-        break;
+            break;
         case "normal":
             con.query("UPDATE PARAMETER SET value = 'SCENERY_GROUP_NORMAL' WHERE name = 'SERVER_INFO_ENABLED_SCENERY'")
             con.query("UPDATE PARAMETER SET value = 'SCENERY_GROUP_NORMAL_DISABLED' WHERE name = 'SERVER_INFO_DISABLED_SCENERY'")
             axios.post(settings.core.url + '/Engine.svc/ReloadParameters', "adminAuth=" + settings.core.token.server, null)
             message.channel.send(":cityscape: • Enabled **" + args[1] + "** scenery.")
-        break;
+            break;
         case "halloween":
             con.query("UPDATE PARAMETER SET value = 'SCENERY_GROUP_HALLOWEEN' WHERE name = 'SERVER_INFO_ENABLED_SCENERY'")
             con.query("UPDATE PARAMETER SET value = 'SCENERY_GROUP_HALLOWEEN_DISABLED' WHERE name = 'SERVER_INFO_DISABLED_SCENERY'")
             axios.post(settings.core.url + '/Engine.svc/ReloadParameters', "adminAuth=" + settings.core.token.server, null)
             message.channel.send(":ghost: • Enabled **" + args[1] + "** scenery.")
-        break;
+            break;
         case "christmas":
             con.query("UPDATE PARAMETER SET value = 'SCENERY_GROUP_CHRISTMAS' WHERE name = 'SERVER_INFO_ENABLED_SCENERY'")
             con.query("UPDATE PARAMETER SET value = 'SCENERY_GROUP_CHRISTMAS_DISABLED' WHERE name = 'SERVER_INFO_DISABLED_SCENERY'")
             axios.post(settings.core.url + '/Engine.svc/ReloadParameters', "adminAuth=" + settings.core.token.server, null)
             message.channel.send(":christmas_tree: • Enabled **" + args[1] + "** scenery.")
-        break;
+            break;
         case "oktoberfest":
             con.query("UPDATE PARAMETER SET value = 'SCENERY_GROUP_OKTOBERFEST' WHERE name = 'SERVER_INFO_ENABLED_SCENERY'")
             con.query("UPDATE PARAMETER SET value = 'SCENERY_GROUP_OKTOBERFEST_DISABLED' WHERE name = 'SERVER_INFO_DISABLED_SCENERY'")
             axios.post(settings.core.url + '/Engine.svc/ReloadParameters', "adminAuth=" + settings.core.token.server, null)
             message.channel.send(":beers: • Enabled **" + args[1] + "** scenery.")
-        break;
+            break;
     }
 }
+module.exports.help = {
+    name: "set",
+    description: ["Changes the global multiplier value.","Changes the reputation multiplier value.","Changes the cash multiplier value.","Changes the version of game mods.","Changes the game map scenery."],
+    param: ["multiplier","repmultiplier","cashmultiplier","modsversion"],
+    category: "Moderator",
+    args: "[player] [reason]",
+    roles: [settings.role.admin,settings.role.moderator] 
+};

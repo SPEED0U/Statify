@@ -50,5 +50,9 @@ module.exports.run = (bot, message, args, con) => {
 };
 
 module.exports.help = {
-    name: "rename"
+    name: "rename",
+    description: ["Rename a player in-game. (`new name` is optional)"],
+    category: "Moderator",
+    args: "[player] [new name]",
+    roles: [settings.role.admin,settings.role.moderator] 
 };

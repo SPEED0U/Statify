@@ -54,5 +54,9 @@ module.exports.run = (bot, message, args, con) => {
 }
 
 module.exports.help = {
-    name: "player"
+    name: "player",
+    description: ["Show the stats of a player."],
+    category: "Player",
+    args: "[player]",
+    roles: [settings.role.player] 
 };

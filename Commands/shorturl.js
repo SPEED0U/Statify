@@ -27,5 +27,9 @@ module.exports.run = async (bot, message, args, con) => {
 };
 
 module.exports.help = {
-    name: "shorturl"
+    name: "shorturl",
+    description: ["Shortner a requested URL."],
+    category: "Moderator",
+    args: "[url]",
+    roles: [settings.role.admin,settings.role.moderator] 
 };

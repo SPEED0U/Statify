@@ -42,5 +42,9 @@ module.exports.run = (bot, message, args, con) => {
 }
 
 module.exports.help = {
-    name: "kick"
+    name: "kick",
+    description: ["Kick a player from the game."],
+    category: "Moderator",
+    args: "[player] [reason]",
+    roles: [settings.role.admin,settings.role.moderator] 
 };

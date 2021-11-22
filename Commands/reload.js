@@ -10,5 +10,9 @@ module.exports.run = (bot, message, args, con) => {
     }
 }
 module.exports.help = {
-    name: "reload"
+    name: "reload",
+    description: ["Reload the server parameter cache to apply new settings."],
+    category: "Administrator",
+    args: "",
+    roles: [settings.role.admin,settings.role.moderator] 
 };

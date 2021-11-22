@@ -23,10 +23,6 @@ module.exports.run = (bot, message, args, con) => {
     }
 };
 
-module.exports.help = {
-    name: "stat"
-};
-
 function copsdestroyed(bot, message, args, con) {
     con.query("SELECT SUM(`copsDisabled`) AS sum FROM `EVENT_DATA` WHERE finishReason IN(22,518)", function(err, result) {
         if (!err) message.channel.send(":oncoming_police_car: • There was **" + Intl.NumberFormat('en-US').format(result[0].sum) + "** cops destroyed.")
@@ -102,3 +98,20 @@ function msToTime(duration) {
 
     return days + " days, " + hours + " hours, " + minutes + " minutes and " + seconds + " seconds "
 }
+
+module.exports.help = {
+    name: "stat",
+    description: [  
+                    "Show how much cops has been destroyed.",
+                    "Show how much cops has been rammed.",
+                    "Show how much time players spent in airs.",
+                    "Show how much events has been completed today.",
+                    "Show how much events has been completed this week.",
+                    "Show how much players are currently connected.",
+                    "Show how much players are registered on server."
+                ],
+    param: ["copsdestroyed","copsrammed","playersbusted","airtime","eventstoday","eventsthisweek","onlineplayers","registeredplayers"],
+    category: "Moderator",
+    args: "[player] [reason]",
+    roles: [settings.role.admin,settings.role.moderator] 
+};

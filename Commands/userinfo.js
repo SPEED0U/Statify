@@ -45,11 +45,8 @@ module.exports.run = (bot, message, args, con) => {
 
 module.exports.help = {
     name: "userinfo",
-    commands: [{
-        name: "userinfo",
-        description: "Fetches information about an user",
-        usage: [{
-            "[personaname]": "persona name (required)"
-        }]
-    }]
+    description: ["Show specific info about the account of a player."],
+    category: "Moderator",
+    args: "[player]",
+    roles: [settings.role.admin,settings.role.moderator] 
 };

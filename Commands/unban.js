@@ -54,5 +54,9 @@ module.exports.run = (bot, message, args, con) => {
 }
 
 module.exports.help = {
-    name: "unban"
+    name: "unban",
+    description: ["Unban a player from the game."],
+    category: "Moderator",
+    args: "[player] [reason]",
+    roles: [settings.role.admin,settings.role.moderator] 
 };

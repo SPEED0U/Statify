@@ -12,5 +12,9 @@ module.exports.run = (bot, message, args, con) => {
 };
 
 module.exports.help = {
-    name: "lock"
+    name: "lock",
+    description: ["Lock the account of a player."],
+    category: "Moderator",
+    args: "[email]",
+    roles: [settings.role.admin,settings.role.moderator] 
 };

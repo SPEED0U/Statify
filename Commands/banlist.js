@@ -53,5 +53,9 @@ module.exports.run = (bot, message, args, con) => {
 }
 
 module.exports.help = {
-    name: "banlist"
+    name: "banlist",
+    description: ["List the ban records of a player."],
+    category: "Moderator",
+    args: "[player]",
+    roles: [settings.role.admin,settings.role.moderator] 
 };

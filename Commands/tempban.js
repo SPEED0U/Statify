@@ -93,5 +93,9 @@ module.exports.run = (bot, message, args, con) => {
 }
 
 module.exports.help = {
-    name: "tempban"
+    name: "tempban",
+    description: ["Temporarily ban a player from the game."],
+    category: "Moderator",
+    args: "[player] [duration] [reason]",
+    roles: [settings.role.admin,settings.role.moderator] 
 };

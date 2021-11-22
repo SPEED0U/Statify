@@ -33,5 +33,9 @@ module.exports.run = (bot, message, args, con) => {
 };
 
 module.exports.help = {
-    name: "announce"
+    name: "announce",
+    description: ["Sends a announcement thru the game chat."],
+    category: "Moderator",
+    args: "[color] [prefix] [announcement]",
+    roles: [settings.role.admin,settings.role.moderator] 
 };

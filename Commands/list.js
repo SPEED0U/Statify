@@ -32,5 +32,9 @@ module.exports.run = (bot, message, args, con) => {
 }
 
 module.exports.help = {
-    name: "list"
+    name: "list",
+    description: "List choosen hash type registered in database.",
+    category: "Launcher developer",
+    args: "[SHA or HWID]",
+    roles: [settings.role.admin,settings.role.launcher] 
 };

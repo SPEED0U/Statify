@@ -39,5 +39,9 @@ module.exports.run = (bot, message, args, con) => {
 };
 
 module.exports.help = {
-    name: "del"
+    name: "del",
+    description: ["Remove a choosen quantity of currency to a player."],
+    category: "Moderator",
+    args: "[amount] [currency] [persona]",
+    roles: [settings.role.admin,settings.role.moderator] 
 };
