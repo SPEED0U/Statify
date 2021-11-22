@@ -23,14 +23,12 @@ module.exports.run = async (bot, message, args) => {
         message.member.roles.cache.forEach(r => roles.push(r.id))
     }
     const embed = new MessageEmbed()
-        .setAuthor("Command list", 'https://cdn.nightriderz.world/images/website/NR_NoBG_Shadow.png', 'https://nightriderz.world')
         .setColor("#6600ff")
         .setDescription("Every commands of **Statify** are listed below.")
-        .setFooter("Requested at")
-        .setTimestamp()
+        message.channel.send({ embeds: [embed] })
+        var description = {}
 
     for (const category in helps) {
-        var description = ""
         for (const help of helps[category]) {
             if (help.hidden === true) continue;
             var cansee = help.roles === undefined || help.roles.length === 0
@@ -41,19 +39,28 @@ module.exports.run = async (bot, message, args) => {
             }
 
             if (cansee) {
-                i = 0
                 if (help.description)
-                    help.description.forEach(desc => {
+                    help.description.forEach((desc, i) => {
                         var param = ""
                         if (help.param) param = " " + help.param[i]
-                        description += "**" + settings.bot.prefix + help.name + (param ?? '') + " " + (help.args ?? '') + "** | " + (desc ?? '') + "\n"
-                        i++
+                        if(!description[category]) description[category] = []
+                        description[category].push( {name: settings.bot.prefix + help.name + (param ?? '') + " " + (help.args ?? ''), description : (desc ?? '') } )
                     })
+
             }
         }
-        if (description.length > 0) embed.addField(category, description)
+        if(category && description[category]){
+            const embed = new MessageEmbed()
+            .setDescription("__**" + category + "**__")
+            .setColor("#6600ff")
+
+            for(const desc of description[category]) {
+                embed.addField("**" + desc['name'] + "**", desc['description'])
+            }
+            message.channel.send({ embeds: [embed] })
+        }
     }
-    message.channel.send({ embeds: [embed] })
+    console.log(embed.length)
 };
 
 module.exports.help = {
