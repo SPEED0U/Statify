@@ -60,7 +60,6 @@ module.exports.run = async (bot, message, args) => {
             message.channel.send({ embeds: [embed] })
         }
     }
-    console.log(embed.length)
 };
 
 module.exports.help = {
