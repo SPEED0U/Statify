@@ -9,13 +9,13 @@ module.exports.run = (bot, message, args, con) => {
                 const embed = new MessageEmbed()
                     .setAuthor(result[0].personaname, "", settings.url.website + settings.url.pathToProfile + result[0].personaid, true)
                     .setThumbnail(settings.url.avatarEndpoint + result[0].iconIndex + settings.url.avatarFormat, true)
-                    if (result[0].prestige > 0) {
-                        embed.addField("__Level__", result[0].personalevel + " (Prestige: " + result[0].prestige + ")", true)
-                    }
-                    else {
-                        embed.addField("__Level__", result[0].personalevel.toString(), true)
-                    }
-                    embed.addField("__Cash__", Number(result[0].cash).toLocaleString('en-GB') + " $", true)
+                if (result[0].prestige > 0) {
+                    embed.addField("__Level__", result[0].personalevel + " (Prestige: " + result[0].prestige + ")", true)
+                }
+                else {
+                    embed.addField("__Level__", result[0].personalevel.toString(), true)
+                }
+                embed.addField("__Cash__", Number(result[0].cash).toLocaleString('en-GB') + " $", true)
                     .addField("__Speedboost__", Number(result[0].boost).toLocaleString('en-GB') + " SB", true)
                 if (result[0].streak <= 1) {
                     embed.addField("__Treasure hunt__", (result[0].streak + " day " + ((result[0].isStreakBroken[0] === 1 ? " [broken]" : " [active]"))), true)
@@ -31,8 +31,8 @@ module.exports.run = (bot, message, args, con) => {
                     .setDescription("Motto: " + "`" + description + "`")
 
                 const button = new MessageButton()
-                .setLabel('View full profile on website')
-                .setStyle('LINK')
+                    .setLabel('View full profile on website')
+                    .setStyle('LINK')
                 if (settings.url.profileFormat == "ID") {
                     button.setURL(settings.url.website + settings.url.pathToProfile + result[0].personaid)
                 } else if (settings.url.profileFormat == "Name") {
@@ -49,14 +49,19 @@ module.exports.run = (bot, message, args, con) => {
             }
         })
     } else {
-        message.channel.send("You do not have enough permissions to run this command.")
+        const embed = new MessageEmbed()
+        .setColor("#ff0000")
+        .addField("Insufficient permissions", "You need `" + this.help.category.substring(4) + "` permissions to run this command.")
+        .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+        .setTimestamp()
+    message.channel.send({ embeds: [embed] })
     }
 }
 
 module.exports.help = {
     name: "player",
     description: ["Show the stats of a player."],
-    category: "Player",
+    category: "[🎮] Player",
     args: "[player]",
-    roles: [settings.role.player] 
+    roles: [settings.role.player]
 };

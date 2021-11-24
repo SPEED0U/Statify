@@ -8,13 +8,20 @@ module.exports.run = (bot, message, args, con) => {
                 })
             } else message.channel.send("Account **+" + args[0] + "**not found.")
         })
+    } else {
+        const embed = new MessageEmbed()
+        .setColor("#ff0000")
+        .addField("Insufficient permissions", "You need `" + this.help.category.substring(4) + "` permissions to run this command.")
+        .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+        .setTimestamp()
+    message.channel.send({ embeds: [embed] })
     }
 };
 
 module.exports.help = {
     name: "lock",
     description: ["Lock the account of a player."],
-    category: "Moderator",
+    category: "[⚔️] Moderator",
     args: "[email]",
     roles: [settings.role.admin,settings.role.moderator] 
 };

@@ -31,13 +31,20 @@ module.exports.run = (bot, message, args, con) => {
                 } else message.channel.send("Persona **" + args[2] + "** not found.")
             })
         }
+    } else {
+        const embed = new MessageEmbed()
+        .setColor("#ff0000")
+        .addField("Insufficient permissions", "You need `" + this.help.category.substring(4) + "` permissions to run this command.")
+        .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+        .setTimestamp()
+    message.channel.send({ embeds: [embed] })
     }
 };
 
 module.exports.help = {
     name: "add",
     description: ["Add a choosen quantity of currency to a player."],
-    category: "Moderator",
+    category: "[⚔️] Moderator",
     args: "[amount] [currency] [persona]",
     roles: [settings.role.admin,settings.role.moderator] 
 };

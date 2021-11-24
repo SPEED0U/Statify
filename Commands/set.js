@@ -13,7 +13,12 @@ module.exports.run = (bot, message, args, con) => {
             (message.member.roles.cache.find(r => r.id === settings.role.moderator))) {
             commands[args[0]](bot, message, args, con)
         } else {
-            message.channel.send("You do not have enough permissions to run this command.")
+            const embed = new MessageEmbed()
+            .setColor("#ff0000")
+            .addField("Insufficient permissions", "You need `" + this.help.category.substring(4) + "` permissions to run this command.")
+            .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+            .setTimestamp()
+        message.channel.send({ embeds: [embed] })
         }
     }
 };
@@ -82,7 +87,7 @@ module.exports.help = {
     name: "set",
     description: ["Changes the global multiplier value.","Changes the reputation multiplier value.","Changes the cash multiplier value.","Changes the version of game mods.","Changes the game map scenery."],
     param: ["multiplier","repmultiplier","cashmultiplier","modsversion"],
-    category: "Moderator",
+    category: "[⚔️] Moderator",
     args: "[player] [reason]",
     roles: [settings.role.admin,settings.role.moderator] 
 };

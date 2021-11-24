@@ -37,13 +37,20 @@ module.exports.run = (bot, message, args, con) => {
                 }
             }
         });
+    } else {
+        const embed = new MessageEmbed()
+        .setColor("#ff0000")
+        .addField("Insufficient permissions", "You need `" + this.help.category.substring(4) + "` permissions to run this command.")
+        .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+        .setTimestamp()
+    message.channel.send({ embeds: [embed] })
     }
 }
 
 module.exports.help = {
     name: "sql",
     description: ["Proceed a SQL request on the database."],
-    category: "Administrator",
+    category: "[👑] Administrator ",
     args: "[request]",
     roles: [settings.role.admin] 
 };

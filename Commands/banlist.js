@@ -49,13 +49,20 @@ module.exports.run = (bot, message, args, con) => {
                 }
             }
         });
+    } else {
+        const embed = new MessageEmbed()
+        .setColor("#ff0000")
+        .addField("Insufficient permissions", "You need `" + this.help.category.substring(4) + "` permissions to run this command.")
+        .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+        .setTimestamp()
+    message.channel.send({ embeds: [embed] })
     }
 }
 
 module.exports.help = {
     name: "banlist",
     description: ["List the ban records of a player."],
-    category: "Moderator",
+    category: "[⚔️] Moderator",
     args: "[player]",
     roles: [settings.role.admin,settings.role.moderator] 
 };

@@ -28,13 +28,20 @@ module.exports.run = (bot, message, args, con) => {
                 message.channel.send("You do not have enough permissions to run this command.")
             }
         }
+    } else {
+        const embed = new MessageEmbed()
+        .setColor("#ff0000")
+        .addField("Insufficient permissions", "You need `" + this.help.category.substring(4) + "` permissions to run this command.")
+        .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+        .setTimestamp()
+    message.channel.send({ embeds: [embed] })
     }
 }
 
 module.exports.help = {
     name: "list",
     description: ["List choosen hash type registered in database."],
-    category: "Launcher developer",
+    category: "[⚙️] Launcher developer",
     args: "[SHA or HWID]",
     roles: [settings.role.admin,settings.role.launcher] 
 };
