@@ -162,6 +162,6 @@ Type the following command to use the easiest way to update the bot and run it.
 
 
 #
-Realized with ❤️ by [Speedou](https://github.com/SPEED0U), [Floruzus](https://github.com/Floruzus), [Kova](https://github.com/Kovania) and [MeTonaTOR](https://github.com/MeTonaTOR).
+Realized with ❤️ by [Speedou](https://github.com/SPEED0U), [Floruzus](https://github.com/Floruzus), [Kova](https://github.com/Kovania) and [Harnasiowa](https://github.com/harnasiowa).
 
 Please do not withdraw the license and keep the credits on this project.
