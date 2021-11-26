@@ -17,72 +17,67 @@ If a new parameter has been added you'll have to add the new line in the `local.
 
 ```JSON
 {
-    "bot" : {
-        "prefix" : "s!",
-        "token" : "",
-        "serverid" : "",
-        "embed" : {
-            "hexColor" : "#6600ff",
-            "logo" : "https://image.url/logo.png"
-        }
-    },
-
-    "channel" : {
-        "announcement" : "",
-        "support" : {
-            "needhelp" : "",
-            "bugreport" : ""
-        },
-        "banlogs" : "",
-        "serverlogs" : "",
-        "status" : "",
-        "command" : {
-            "admin" : "",
-            "moderator" : "",
-            "public" : ""
-        }
-    },
-
-    "role" : {
-        "admin" : "",
-        "moderator" : "",
-        "launcher" : "",
-        "player" : "",
-        "onArrival" : false,
-        "countdown" : 600000
-    },
-
-    "url" : {
-        "website" : "https://your.website",
-        "pathToProfile" : "/player/driver/",
-        "profileFormat" : "ID",
-        "avatarFormat" : ".jpg",
-        "avatarEndpoint" : "https://avatar.endpoint.url/"
-    },
-
-    "core" : {
-        "serverName" : "",
-        "url" : "http://url.ofyour.core:8080",
-        "maxPlayerAnnounceLobby" : "",
-        "announceLobbies" : true,
-        "timezone" : "CET",
-        "token" : {
-            "server" : "",
-            "openfire" : ""
-        }
-    },
-
-    "sql" : {
-        "host" : "",
-        "user" : "",
-        "password" : "",
-        "database" : ""
-    },
-
-    "antispam" : {
-        "maxDuplicate" : 3,
-        "delay" : 5 
+  "bot": {
+    "prefix": "s!",
+    "token": "",
+    "serverid": "",
+    "embed": {
+      "hexColor": "#",
+      "logo": "https://image.url/logo.png"
     }
+  },
+  "channel": {
+    "announcement": "",
+    "support": {
+      "needhelp": "",
+      "bugreport": ""
+    },
+    "banlogs": "",
+    "serverlogs": "",
+    "status": "",
+    "command": {
+      "admin": "",
+      "moderator": "",
+      "public": ""
+    }
+  },
+  "role": {
+    "admin": "",
+    "moderator": "",
+    "launcher": "",
+    "player": "",
+    "onArrival": false,
+    "countdown": 600000
+  },
+  "url": {
+    "website": "https://your.website",
+    "pathToProfile": "/player/driver/",
+    "profileFormat": "ID",
+    "avatarFormat": ".jpg",
+    "avatarEndpoint": "https://avatar.endpoint.url/"
+  },
+  "core": {
+    "serverName": "",
+    "url": "http://url.ofyour.core:8080",
+    "maxPlayerAnnounceLobby": "",
+    "announceLobbies": true,
+    "timezone": "CET",
+    "token": {
+      "server": "",
+      "openfire": ""
+    },
+    "botPersonaId": 0
+  },
+  "sql": {
+    "host": "",
+    "user": "",
+    "password": "",
+    "database": ""
+  },
+  "antispam": {
+    "maxDuplicate": 3,
+    "delay": 5
+  }
 }
 ```
 
@@ -125,6 +120,7 @@ Core configuration
 - `core.token.openfire`, the openfire token of your server.
 - `core.announceLobbies`, enable or disable (`true` or `false`) the lobby announcements in chat managed by the bot.
 - `core.timezone`, the current timezone of your server. See [this website](https://24timezones.com/time-zones) to know the list of timezones.
+- `core.botPersonaId`, the ID of the persona that the bot will use to register bans in database.
 
 Database configuration
 - `sql.host`, the host IP of your mysql server.
@@ -166,6 +162,6 @@ Type the following command to use the easiest way to update the bot and run it.
 
 
 #
-Realized with ❤️ by [Speedou](https://github.com/SPEED0U), [Floruzus](https://github.com/Floruzus) and [MeTonaTOR](https://github.com/MeTonaTOR).
+Realized with ❤️ by [Speedou](https://github.com/SPEED0U), [Floruzus](https://github.com/Floruzus), [Kova](https://github.com/Kovania) and [Harnasiowa](https://github.com/harnasiowa).
 
 Please do not withdraw the license and keep the credits on this project.
