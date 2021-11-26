@@ -86,7 +86,7 @@ function scenery(bot, message, args, con) {
 module.exports.help = {
     name: "set",
     description: ["Changes the global multiplier value.","Changes the reputation multiplier value.","Changes the cash multiplier value.","Changes the version of game mods.","Changes the game map scenery."],
-    param: ["multiplier","repmultiplier","cashmultiplier","modsversion"],
+    param: ["multiplier","repmultiplier","cashmultiplier","modsversion","scenery"],
     category: "[⚔️] Moderator",
     args: "[player] [reason]",
     roles: [settings.role.admin,settings.role.moderator] 
