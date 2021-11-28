@@ -1,13 +1,49 @@
 const settings = require("../settings.js");
 module.exports.run = (bot, message, args, con) => {
     if ((message.channel.id === settings.channel.command.admin || message.channel.id === settings.channel.command.moderator) && (message.member && message.member.roles.cache.find(r => r.id === settings.role.moderator))) {
-        con.query("SELECT ID FROM USER WHERE email = ?", [args[0]], (err, result) => {
-            if (result.length > 0) {
-                con.query("UPDATE USER SET isLocked = 0 WHERE email = ?", [args[0]], err => {
-                    if (!err) message.channel.send("Unlocked **" + args[0] + "**'s account.")
-                })
-            } else message.channel.send("Account **" + args[0] + "not found.")
-        })
+        if (args[0].includes('@')) {
+            con.query("SELECT ID FROM USER WHERE email = ?", [args[0]], (err, result) => {
+                if (result.length > 0) {
+                    con.query("UPDATE USER SET isLocked = 0 WHERE email = ?", [args[0]], err => {
+                        const embed = new MessageEmbed()
+                            .setAuthor("Player account unlocked")
+                            .setColor("#00ff2f")
+                            .setDescription("The account attached to the email `" + args[0] + "` has been unlocked.")
+                            .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                            .setTimestamp()
+                        message.channel.send({ embeds: [embed] })
+                    })
+                } else {
+                    const embed = new MessageEmbed()
+                        .setColor("#fff700")
+                        .setDescription("There is no account attached to the email `" + args[0] + "`")
+                        .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                        .setTimestamp()
+                    message.channel.send({ embeds: [embed] })
+                }
+            })
+        } else {
+            con.query("SELECT USERID FROM PERSONA WHERE name = ?", [args[0]], (err, result) => {
+                if (result.length > 0) {
+                    con.query("UPDATE USER SET isLocked = 0 WHERE ID = ?", result[0].USERID, err => {
+                        const embed = new MessageEmbed()
+                            .setAuthor("Player account unlocked")
+                            .setColor("#00ff2f")
+                            .setDescription("The account attached to the driver `" + args[0] + "` has been unlocked.")
+                            .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                            .setTimestamp()
+                        message.channel.send({ embeds: [embed] })
+                    })
+                } else {
+                    const embed = new MessageEmbed()
+                        .setColor("#fff700")
+                        .setDescription("There is no account attached to the driver `" + args[0] + "`")
+                        .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                        .setTimestamp()
+                    message.channel.send({ embeds: [embed] })
+                }
+            })
+        }
     } else {
         const embed = new MessageEmbed()
             .setColor("#ff0000")
