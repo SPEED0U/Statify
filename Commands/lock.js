@@ -60,6 +60,6 @@ module.exports.help = {
     name: "lock",
     description: ["Lock the account of a player."],
     category: "[⚔️] Moderator",
-    args: "[email]",
+    args: "[email or driver]",
     roles: [settings.role.admin, settings.role.moderator]
 };
