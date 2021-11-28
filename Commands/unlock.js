@@ -1,4 +1,6 @@
 const settings = require("../settings.js");
+const { MessageEmbed } = require('discord.js');
+
 module.exports.run = (bot, message, args, con) => {
     if ((message.channel.id === settings.channel.command.admin || message.channel.id === settings.channel.command.moderator) && (message.member && message.member.roles.cache.find(r => r.id === settings.role.moderator))) {
         if (args[0].includes('@')) {
