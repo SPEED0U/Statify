@@ -54,7 +54,8 @@ If a new parameter has been added you'll have to add the new line in the `local.
     "pathToProfile": "/player/driver/",
     "profileFormat": "ID",
     "avatarFormat": ".jpg",
-    "avatarEndpoint": "https://avatar.endpoint.url/"
+    "avatarEndpoint": "https://avatar.endpoint.url/",
+    "modsEnpoint:": "https://mods.enpoint.url/"
   },
   "core": {
     "serverName": "",
@@ -111,6 +112,7 @@ URL configuration
 - `url.pathToProfile`, the path to the user profile on website.
 - `url.profileFormat`, manage the URL endpoint if your website manage profile url with `ID` or `Name`.
 - `url.avatarFormat`, the format of images hosted on the avatar endpoint.
+- `url.modsEndpoint`, the url where mods versions are located.
 
 Core configuration
 - `core.serverName`, the name of your NFS:W server.

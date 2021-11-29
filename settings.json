@@ -39,7 +39,8 @@
         "pathToProfile" : "/player/driver/",
         "profileFormat" : "ID",
         "avatarFormat" : ".jpg",
-        "avatarEndpoint" : "https://avatar.endpoint.url/"
+        "avatarEndpoint" : "https://avatar.endpoint.url/",
+        "modsEndpoint" : "https://mods.endpoint.url/"
     },
 
     "core" : {

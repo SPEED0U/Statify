@@ -43,7 +43,7 @@ function multiplier(bot, message, args, con) {
 }
 
 function modsversion(bot, message, args, con) {
-    const modsurl = "https://cdn.nightriderz.world/mods/" + args[1]
+    const modsurl = settings.url.modsEndpoint + args[1]
     con.query("UPDATE PARAMETER SET value = ? WHERE name = 'MODDING_BASE_PATH'", [modsurl], err => {
         if (!err) message.channel.send(":gear: • Updated **mods version** to **" + args[1] + "**\n" + "Apply the changes by using `" + settings.bot.prefix + "reload`.")
     })
