@@ -1,16 +1,15 @@
 const settings = require("../settings.js");
+const { MessageEmbed } = require('discord.js');
 const axios = require('axios');
 const commands = {
-    copsdestroyed,
-    copsrammed,
-    playersbusted,
-    airtime,
-    eventstoday,
-    eventsthisweek,
-    onlineplayers,
-    registeredplayers,
-    forgedpartsinv,
-    forgedpartsinstalled
+    copsDestroyed,
+    copsRammed,
+    playersBusted,
+    airTime,
+    eventsToday,
+    eventsThisweek,
+    onlinePlayers,
+    registeredPlayers
 }
 module.exports.run = (bot, message, args, con) => {
     if (commands[args[0]]) {
@@ -28,64 +27,125 @@ module.exports.run = (bot, message, args, con) => {
     }
 };
 
-function copsdestroyed(bot, message, args, con) {
+function copsDestroyed(bot, message, args, con) {
     con.query("SELECT SUM(`copsDisabled`) AS sum FROM `EVENT_DATA` WHERE finishReason IN(22,518)", function(err, result) {
-        if (!err) message.channel.send(":oncoming_police_car: • There was **" + Intl.NumberFormat('en-US').format(result[0].sum) + "** cops destroyed.")
+        if (!err) {
+            const embed = new MessageEmbed()
+                .setAuthor("Statistics")
+                .setColor("#b2c6d1")
+                .addField("Cops destroyed", "`" + result[0].sum + "` cops have been destroyed.")
+                .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                .setTimestamp()
+            message.channel.send({ embeds: [embed] })
+            newSettings(bot, message, args, con)
+        }
     });
 }
 
-function copsrammed(bot, message, args, con) {
+function copsRammed(bot, message, args, con) {
     con.query("SELECT SUM(`copsRammed`) AS sum FROM `EVENT_DATA` WHERE finishReason IN(22,518)", function(err, result) {
-        if (!err) message.channel.send(":oncoming_police_car: • There was **" + Intl.NumberFormat('en-US').format(result[0].sum) + "** cops rammed.")
+        if (!err) {
+            const embed = new MessageEmbed()
+                .setAuthor("Statistics")
+                .setColor("#b2c6d1")
+                .addField("Cops rammed", "`" + result[0].sum + "` cops have been rammed.")
+                .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                .setTimestamp()
+            message.channel.send({ embeds: [embed] })
+            newSettings(bot, message, args, con)
+        }
     });
 }
 
-function playersbusted(bot, message, args, con) {
+function playersBusted(bot, message, args, con) {
     con.query("SELECT SUM(`bustedCount`) AS sum FROM `EVENT_DATA` WHERE finishReason IN(22,518)", function(err, result) {
-        if (!err) message.channel.send(":police_officer_tone2: • There was **" + Intl.NumberFormat('en-US').format(result[0].sum) + "** players busted.")
+        if (!err) {
+            const embed = new MessageEmbed()
+                .setAuthor("Statistics")
+                .setColor("#b2c6d1")
+                .addField("Players busted", "`" + result[0].sum + "` players have been busted.")
+                .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                .setTimestamp()
+            message.channel.send({ embeds: [embed] })
+            newSettings(bot, message, args, con)
+        }
     });
 }
 
-function airtime(bot, message, args, con) {
+function airTime(bot, message, args, con) {
     con.query("SELECT SUM(`sumOfJumpsDurationInMilliseconds`) AS sum FROM `EVENT_DATA` WHERE finishReason IN(22,518)", function(err, result) {
-        if (!err) message.channel.send(":timer: • Players spent a total of **" + msToTime(result[0].sum) + "**in air.")
+        if (!err) {
+            const embed = new MessageEmbed()
+                .setAuthor("Statistics")
+                .setColor("#b2c6d1")
+                .addField("Air time", "Players spent `" + msToTime(result[0].sum) + "` in airs.")
+                .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                .setTimestamp()
+            message.channel.send({ embeds: [embed] })
+            newSettings(bot, message, args, con)
+        }
     });
 }
 
-function eventstoday(bot, message, args, con) {
+function eventsToday(bot, message, args, con) {
     con.query("SELECT COUNT(ID) AS sum FROM `EVENT_DATA` WHERE finishReason IN(22,518) AND `DATE_PLAY` LIKE concat(curdate(),'%')", function(err, result) {
-        if (!err) message.channel.send(":chart_with_upwards_trend: • There was **" + Intl.NumberFormat('en-US').format(result[0].sum) + "** events completed today.")
+        if (!err) {
+            const embed = new MessageEmbed()
+                .setAuthor("Statistics")
+                .setColor("#b2c6d1")
+                .addField("Events completed today", "`" + Intl.NumberFormat('en-US').format(result[0].sum) + "` events have been completed today.")
+                .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                .setTimestamp()
+            message.channel.send({ embeds: [embed] })
+            newSettings(bot, message, args, con)
+        }
     });
 }
 
-function eventsthisweek(bot, message, args, con) {
+function eventsThisweek(bot, message, args, con) {
     con.query("SELECT COUNT(ID) AS sum FROM `EVENT_DATA` WHERE finishReason IN(22,518) AND `DATE_PLAY` > DATE_FORMAT(SUBDATE(now(), dayofweek(now()) - 2), '%Y-%m-%d')", function(err, result) {
-        if (!err) message.channel.send(":chart_with_upwards_trend: • There was **" + Intl.NumberFormat('en-US').format(result[0].sum) + "** events completed this week.")
+        if (!err) {
+            const embed = new MessageEmbed()
+                .setAuthor("Statistics")
+                .setColor("#b2c6d1")
+                .addField("Events completed this week", "`" + Intl.NumberFormat('en-US').format(result[0].sum) + "` events have been completed this week.")
+                .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                .setTimestamp()
+            message.channel.send({ embeds: [embed] })
+            newSettings(bot, message, args, con)
+        }
     });
 }
 
-function onlineplayers(bot, message, args, con) {
-    con.query("SELECT numberOfOnline AS sum FROM ONLINE_USERS ORDER BY ID DESC LIMIT 1", function(err, result) {
-        if (!err) message.channel.send(":globe_with_meridians: • There is **" + Intl.NumberFormat('en-US').format(result[0].sum) + "** players online.")
-    });
-}
-
-function registeredplayers(bot, message, args, con) {
+function onlinePlayers(bot, message, args, con) {
     axios.get(settings.server_core_url + "/Engine.svc/GetServerInformation").then(response => {
         const json = response.data
-        message.channel.send(":chart_with_upwards_trend: • There is **" + Intl.NumberFormat('en-US').format(json.numberOfRegistered) + "** players registered.")
+        if (!err) {
+            const embed = new MessageEmbed()
+                .setAuthor("Statistics")
+                .setColor("#b2c6d1")
+                .addField("Players online", "`" + Intl.NumberFormat('en-US').format(json.numberOfOnline) + "` players actually online.")
+                .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                .setTimestamp()
+            message.channel.send({ embeds: [embed] })
+            newSettings(bot, message, args, con)
+        }
     });
 }
 
-function forgedpartsinv(bot, message, args, con) {
-    con.query("SELECT COUNT(*) AS FORGEDPARTSINV FROM INVENTORY_ITEM WHERE INVENTORY_ITEM.productId LIKE('%SRV-FORGED%')", function(err, result) {
-        if (!err) message.channel.send(":star: • There is **" + result[0].FORGEDPARTSINV + "** forged parts in all player's inventories.")
-    });
-}
-
-function forgedpartsinstalled(bot, message, args, con) {
-    con.query("SELECT COUNT(*) AS FORGEDPARTSINSTALLED FROM PERFORMANCEPART WHERE PERFORMANCEPART.performancePartAttribHash IN('-1851071701','106599177','-1450656527','-1218843908','1665759806','-240640192')", function(err, result) {
-        if (!err) message.channel.send(":star: • There is **" + result[0].FORGEDPARTSINSTALLED + "** forged parts installed on all cars owned.")
+function registeredPlayers(bot, message, args, con) {
+    axios.get(settings.server_core_url + "/Engine.svc/GetServerInformation").then(response => {
+        const json = response.data
+        if (!err) {
+            const embed = new MessageEmbed()
+                .setAuthor("Statistics")
+                .setColor("#b2c6d1")
+                .addField("Players registered", "`" + Intl.NumberFormat('en-US').format(json.numberOfRegistered) + "` players registered.")
+                .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                .setTimestamp()
+            message.channel.send({ embeds: [embed] })
+            newSettings(bot, message, args, con)
+        }
     });
 }
 
@@ -115,7 +175,7 @@ module.exports.help = {
                     "Show how much players are currently connected.",
                     "Show how much players are registered on server."
                 ],
-    param: ["copsdestroyed","copsrammed","playersbusted","airtime","eventstoday","eventsthisweek","onlineplayers","registeredplayers"],
+    param: ["copsDestroyed","copsRammed","playersBusted","airTime","eventstoday","eventsthisweek","onlineplayers","registeredplayers"],
     category: "[⚔️] Moderator",
     args: "[player] [reason]",
     roles: [settings.role.admin,settings.role.moderator] 
