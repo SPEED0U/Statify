@@ -37,7 +37,6 @@ function copsDestroyed(bot, message, args, con) {
                 .setFooter(bot.user.tag, bot.user.displayAvatarURL())
                 .setTimestamp()
             message.channel.send({ embeds: [embed] })
-            newSettings(bot, message, args, con)
         }
     });
 }
@@ -52,7 +51,6 @@ function copsRammed(bot, message, args, con) {
                 .setFooter(bot.user.tag, bot.user.displayAvatarURL())
                 .setTimestamp()
             message.channel.send({ embeds: [embed] })
-            newSettings(bot, message, args, con)
         }
     });
 }
@@ -67,7 +65,6 @@ function playersBusted(bot, message, args, con) {
                 .setFooter(bot.user.tag, bot.user.displayAvatarURL())
                 .setTimestamp()
             message.channel.send({ embeds: [embed] })
-            newSettings(bot, message, args, con)
         }
     });
 }
@@ -82,7 +79,6 @@ function airTime(bot, message, args, con) {
                 .setFooter(bot.user.tag, bot.user.displayAvatarURL())
                 .setTimestamp()
             message.channel.send({ embeds: [embed] })
-            newSettings(bot, message, args, con)
         }
     });
 }
@@ -97,7 +93,6 @@ function eventsToday(bot, message, args, con) {
                 .setFooter(bot.user.tag, bot.user.displayAvatarURL())
                 .setTimestamp()
             message.channel.send({ embeds: [embed] })
-            newSettings(bot, message, args, con)
         }
     });
 }
@@ -112,7 +107,6 @@ function eventsThisweek(bot, message, args, con) {
                 .setFooter(bot.user.tag, bot.user.displayAvatarURL())
                 .setTimestamp()
             message.channel.send({ embeds: [embed] })
-            newSettings(bot, message, args, con)
         }
     });
 }
@@ -128,7 +122,6 @@ function onlinePlayers(bot, message, args, con) {
                 .setFooter(bot.user.tag, bot.user.displayAvatarURL())
                 .setTimestamp()
             message.channel.send({ embeds: [embed] })
-            newSettings(bot, message, args, con)
         }
     });
 }
@@ -144,7 +137,6 @@ function registeredPlayers(bot, message, args, con) {
                 .setFooter(bot.user.tag, bot.user.displayAvatarURL())
                 .setTimestamp()
             message.channel.send({ embeds: [embed] })
-            newSettings(bot, message, args, con)
         }
     });
 }
