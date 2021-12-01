@@ -29,7 +29,7 @@ module.exports.run = (bot, message, args, con) => {
 };
 
 function copsdestroyed(bot, message, args, con) {
-    con.query("SELECT SUM(`copsDisabled`) AS sum FROM `EVENT_DATA` WHERE finishReason IN(22,518)", function(err, result) {
+    con.query("SELECT SUM(`copsDisabled`) AS sum FROM `EVENT_DATA`", function(err, result) {
         if (!err) {
             const embed = new MessageEmbed()
                 .setAuthor("Statistics")
@@ -43,7 +43,7 @@ function copsdestroyed(bot, message, args, con) {
 }
 
 function copsrammed(bot, message, args, con) {
-    con.query("SELECT SUM(`copsrammed`) AS sum FROM `EVENT_DATA` WHERE finishReason IN(22,518)", function(err, result) {
+    con.query("SELECT SUM(`copsrammed`) AS sum FROM `EVENT_DATA`", function(err, result) {
         if (!err) {
             const embed = new MessageEmbed()
                 .setAuthor("Statistics")
