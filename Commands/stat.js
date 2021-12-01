@@ -154,7 +154,7 @@ function msToTime(duration) {
     minutes = (minutes < 10) ? "0" + minutes : minutes
     seconds = (seconds < 10) ? "0" + seconds : seconds
 
-    return days + " days, " + hours + " hours, " + minutes + " minutes and " + seconds + " seconds "
+    return days + " days, " + hours + " hours, " + minutes + " minutes and " + seconds + " seconds"
 }
 
 module.exports.help = {
