@@ -13,10 +13,10 @@ module.exports.run = (bot, message, args, con) => {
                     var icon = result[0].iconIndex + settings.url.avatarFormat
                     var reason = message.content.replace("s!ban", '').replace(args[0], '').trim();
                     con.query("SELECT gameHardwareHash AS ghh FROM USER WHERE ID = ?", [userid], (err, userInfo) =>
-                    con.query("SELECT * FROM BAN WHERE user_id = " + userid + " AND active = 1", (err, result1) => {
+                        con.query("SELECT * FROM BAN WHERE user_id = " + userid + " AND active = 1", (err, result1) => {
                             if (result1.length == 0) {
                                 con.query("INSERT INTO `BAN` (`id`, `ends_at`, `reason`, `started`, `banned_by_id`, `user_id`, `active`) VALUES (NULL, NULL, ?, NOW(), ?, ?, 1)", [reason, settings.core.botPersonaId, userid], err => {
-                                    con.query("UPDATE HARDWARE_INFO SET banned = 1 WHERE userId = ? AND hardwareHash = ?", [userid,userInfo[0].ghh]), (err)
+                                    con.query("UPDATE HARDWARE_INFO SET banned = 1 WHERE userId = ? AND hardwareHash = ?", [userid, userInfo[0].ghh]), (err)
                                     axios.post(settings.core.url + '/Engine.svc/ofcmdhook?webhook=false&pid=' + settings.core.botPersonaId + '&cmd=kick%20' + result[0].name, null, { headers: { Authorization: settings.core.token.openfire } }).then(res => { }).catch(error => { })
                                     if (reason.length >= 1) {
                                         const post = new URLSearchParams();
@@ -40,7 +40,7 @@ module.exports.run = (bot, message, args, con) => {
                                         post.append('message', `TXT_RED,[${result[0].name}] HAS BEEN PERMANENTLY BANNED.`);
                                         post.append('announcementAuth', settings.core.token.server);
                                         const config = { headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' } };
-                                        axios.post(settings.core.url + '/Engine.svc/Send/Announcement', post, config).then(result2)
+                                        axios.post(settings.core.url + '/Engine.svc/Send/Announcement', post, config)
                                         if (!err) {
                                             const embed = new MessageEmbed()
                                                 .setAuthor(result[0].name + " has been permanently banned.", settings.url.avatarEndpoint + icon)
@@ -67,11 +67,11 @@ module.exports.run = (bot, message, args, con) => {
         });
     } else {
         const embed = new MessageEmbed()
-        .setColor("#ff0000")
-        .addField("Insufficient permissions", "You need `" + this.help.category.substring(4) + "` permissions to run this command.")
-        .setFooter(bot.user.tag, bot.user.displayAvatarURL())
-        .setTimestamp()
-    message.channel.send({ embeds: [embed] })
+            .setColor("#ff0000")
+            .addField("Insufficient permissions", "You need `" + this.help.category.substring(4) + "` permissions to run this command.")
+            .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+            .setTimestamp()
+        message.channel.send({ embeds: [embed] })
     }
 }
 
@@ -80,5 +80,5 @@ module.exports.help = {
     description: ["Permanently ban a player from the game."],
     category: "[⚔️] Moderator",
     args: "[player] [reason]",
-    roles: [settings.role.admin,settings.role.moderator] 
+    roles: [settings.role.admin, settings.role.moderator]
 };
