@@ -45,7 +45,7 @@ module.exports.run = (bot, message, args, con) => {
                                         axios.post(settings.core.url + '/Engine.svc/ofcmdhook?webhook=false&pid=' + settings.core.botPersonaId + '&cmd=kick%20' + result[0].name, null, { headers: { Authorization: settings.core.token.openfire } }).then(res => { }).catch(error => { })
                                         if (!err) {
                                             const post = new URLSearchParams();
-                                            post.append('message', `TXT_RED,[${result[0].name}] HAS BEEN TEMPORARILY BANNED FOR` + nosuffix.toUpperCase() + " " + units[durationsuffix].toUpperCase() + ".");
+                                            post.append('message', `TXT_RED,[${result[0].name}] HAS BEEN TEMPORARILY BANNED FOR ` + nosuffix.toUpperCase() + " " + units[durationsuffix].toUpperCase() + ".");
                                             post.append('announcementAuth', settings.core.token.server);
                                             const config = { headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' } };
                                             axios.post(settings.core.url + '/Engine.svc/Send/Announcement', post, config)

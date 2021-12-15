@@ -9,11 +9,10 @@
     "author": "Speedou",
     "license": "MIT",
     "dependencies": {
+        "as-table": "^1.0.55",
         "axios": "^0.21.4",
         "cron": "^1.8.2",
         "discord.js": "^13.1.0",
-        "mysql": "^2.18.1",
-        "request": "^2.88.2",
-        "as-table": "^1.0.55"
+        "mysql": "^2.18.1"
     }
 }
