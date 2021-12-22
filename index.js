@@ -29,7 +29,7 @@ bot.on("ready", function() {
         })
     fs.readdir("./Commands/", (error, f) => {
         if (error) { return console.error(error); }
-        let commands = f.filter(f => f.split(".").pop() === "js");
+        let commands = f.filter(file => file.endsWith(".js"));
         if (commands.length <= 0) { return console.log("No command found."); }
 
         commands.forEach((f) => {
