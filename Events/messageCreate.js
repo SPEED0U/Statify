@@ -34,7 +34,7 @@ module.exports = (bot, con, message) => {
 }
 
 function antispam(message, bot) {
-    if (message.content.length > 0) {
+    if (message.content.length > 0 && message.content.includes('http')) {
         if (users[message.author.id]) {
             const user = users[message.author.id]
             const lastMessage = user.messages.last()
@@ -51,7 +51,7 @@ function antispam(message, bot) {
                     const embed = new MessageEmbed()
                         .setAuthor(message.author.tag + " has been kicked.", message.author.displayAvatarURL())
                         .setColor("#ff0000")
-                        .addField("Spamming the following text", "`" + message.content + "`")
+                        .addField("Spamming the following text", "```" + message.content + "```")
                         .addField("Discord user id", "`" + message.author.id + "`")
                         .setFooter(bot.user.tag, bot.user.displayAvatarURL())
                         .setTimestamp()
