@@ -34,16 +34,16 @@ module.exports = (bot, con, message) => {
 }
 
 function antispamscam(message, bot) {
-    if (message.content.length > 0) {
+    if (message.content.length > 0 && message.content.includes('http' || '/' || '.' || ':')) {
         if (users[message.author.id]) {
             const user = users[message.author.id]
             const lastMessage = user.messages.last()
             const diff = (message.createdTimestamp - lastMessage.createdTimestamp) / 1000
-            if (diff <= settings.antispam.delay && lastMessage.content === message.content) {
+            if (diff <= settings.antiscam.delay && lastMessage.content === message.content) {
                 if (!user.messages.includes(lastMessage)) user.message.push(lastMessage)
                 user.messages.push(message)
                 const count = user.messages.length
-                if (count === settings.antispam.maxDuplicate) {
+                if (count === settings.antiscam.maxDuplicate) {
                     for (const msg of user.messages) {
                         msg.delete()
                     }
@@ -57,7 +57,6 @@ function antispamscam(message, bot) {
                         .setTimestamp()
                     bot.channels.cache.get(settings.channel.serverlogs).send({ embeds: [embed] })
                     delete users[message.author.id]
-
                 }
             } else {
                 user.messages = [message]
@@ -67,16 +66,16 @@ function antispamscam(message, bot) {
                 messages: [message]
             }
         }
-    } else if (message.content.length > 0 && message.content.includes('http' || '/' || '.' || ':')) {
+    } else if (message.content.length > 0) {
         if (users[message.author.id]) {
             const user = users[message.author.id]
             const lastMessage = user.messages.last()
             const diff = (message.createdTimestamp - lastMessage.createdTimestamp) / 1000
-            if (diff <= settings.antiscam.delay && lastMessage.content === message.content) {
+            if (diff <= settings.antispam.delay && lastMessage.content === message.content) {
                 if (!user.messages.includes(lastMessage)) user.message.push(lastMessage)
                 user.messages.push(message)
                 const count = user.messages.length
-                if (count === settings.antiscam.maxDuplicate) {
+                if (count === settings.antispam.maxDuplicate) {
                     for (const msg of user.messages) {
                         msg.delete()
                     }
