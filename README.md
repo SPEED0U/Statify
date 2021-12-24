@@ -76,8 +76,12 @@ If a new parameter has been added you'll have to add the new line in the `local.
     "database": ""
   },
   "antispam": {
-    "maxDuplicate": 3,
-    "delay": 5
+    "maxDuplicate": 5,
+    "delay": 10
+  }
+  "antiscam" : {
+     "maxDuplicate" : 2,
+     "delay" : 60
   }
 }
 ```
@@ -133,6 +137,10 @@ Database configuration
 Antispam configuration
 - `antispam.maxDuplicate`, the number of times someone can send duplicated text.
 - `antispam.delay`, the maximum watch delay between duplicated messages.
+
+Antiscam configuration
+- `antiscam.maxDuplicate`, the number of times someone can send duplicated text including an url.
+- `antiscam.delay`, the maximum watch delay between duplicated messages.
 
 ### How to install
 
