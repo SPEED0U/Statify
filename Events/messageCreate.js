@@ -67,7 +67,7 @@ function antispamscam(message, bot) {
                 messages: [message]
             }
         }
-    } else if (message.content.length > 0 && message.content.includes('http')) {
+    } else if (message.content.length > 0 && message.content.includes('http' || '/' || '.' || ':')) {
         if (users[message.author.id]) {
             const user = users[message.author.id]
             const lastMessage = user.messages.last()
