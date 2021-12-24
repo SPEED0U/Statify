@@ -8,7 +8,7 @@ module.exports = (bot, con, message) => {
         return;
     }
 
-    antispam(message, bot)
+    antispamscam(message, bot)
 
     if (!message.channel.permissionsFor(bot.user).has('SEND_MESSAGES')) {
         return;
@@ -33,7 +33,7 @@ module.exports = (bot, con, message) => {
     }
 }
 
-function antispam(message, bot) {
+function antispamscam(message, bot) {
     if (message.content.length > 0 && message.content.includes('http')) {
         if (users[message.author.id]) {
             const user = users[message.author.id]
@@ -58,6 +58,38 @@ function antispam(message, bot) {
                     bot.channels.cache.get(settings.channel.serverlogs).send({ embeds: [embed] })
                     delete users[message.author.id]
 
+                }
+            } else {
+                user.messages = [message]
+            }
+        } else {
+            users[message.author.id] = {
+                messages: [message]
+            }
+        }
+    } else if (message.content.length > 0) {
+        if (users[message.author.id]) {
+            const user = users[message.author.id]
+            const lastMessage = user.messages.last()
+            const diff = (message.createdTimestamp - lastMessage.createdTimestamp) / 1000
+            if (diff <= settings.antiscam.delay && lastMessage.content === message.content) {
+                if (!user.messages.includes(lastMessage)) user.message.push(lastMessage)
+                user.messages.push(message)
+                const count = user.messages.length
+                if (count === settings.antiscam.maxDuplicate) {
+                    for (const msg of user.messages) {
+                        msg.delete()
+                    }
+                    message.member.kick('Kicked for spamming "' + message.content + '"')
+                    const embed = new MessageEmbed()
+                        .setAuthor(message.author.tag + " has been kicked.", message.author.displayAvatarURL())
+                        .setColor("#ff0000")
+                        .addField("Spamming the following text", "```" + message.content + "```")
+                        .addField("Discord user id", "`" + message.author.id + "`")
+                        .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                        .setTimestamp()
+                    bot.channels.cache.get(settings.channel.serverlogs).send({ embeds: [embed] })
+                    delete users[message.author.id]
                 }
             } else {
                 user.messages = [message]
