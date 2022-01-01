@@ -36,12 +36,12 @@ bot.on("ready", function () {
             let events = require(`./Events/${f}`);
             let event = f.split('.')[0];
             bot.on(event, events.bind(null, bot, con));
-            console.log("Loaded " + f + " event.");
+            console.log("Loaded " + f + " super duper events uwu.");
         });
     })
     fs.readdir('./Scripts/', (error, f) => {
         if (error) { return console.error(error); }
-        console.log("Loaded " + f + " script.");
+        console.log("OWO! I just loaded a " + f + " senpai!");
 
         f.forEach((f) => {
             let events = require(`./Scripts/${f}`);
