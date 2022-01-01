@@ -66,5 +66,10 @@
     "antispam" : {
         "maxDuplicate" : 3,
         "delay" : 5 
+    },
+
+    "antiscam" : {
+        "maxDuplicate" : 3,
+        "delay" : 5
     }
 }
