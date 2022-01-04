@@ -40,7 +40,7 @@ module.exports.run = (bot, message, args, con) => {
                                             message.channel.send({ embeds: [embed] })
                                         }
                                     }
-                                    con.query("SELECT email, ID FROM USER WHERE gameHardwareHash = ?", [userInfo[0].ghh], (err, otherAcc) => {
+                                    con.query("SELECT email, ID, isLocked FROM USER WHERE gameHardwareHash = ?", [userInfo[0].ghh], (err, otherAcc) => {
                                         if (otherAcc.length > 1) {
                                             const embed = new MessageEmbed()
                                                 .setAuthor(result[0].name + " is also hardware banned on the following accounts", settings.url.avatarEndpoint + icon)
@@ -50,7 +50,7 @@ module.exports.run = (bot, message, args, con) => {
                                                     .setColor("#ff0000")
                                                     .addField("Email", "`" + acc.email + "`")
                                                     .addField("User ID", "`" + acc.ID + "`")
-                                                    .addField("Account state", locked == 1 ? "`Locked`" : "`Unlocked`")
+                                                    .addField("Account state", acc.isLocked == 1 ? "`Locked`" : "`Unlocked`")
                                                     .setFooter(bot.user.tag, bot.user.displayAvatarURL())
                                                     .setTimestamp()
                                                 message.channel.send({ embeds: [embed] })
