@@ -20,7 +20,9 @@ module.exports.run = (bot, message, args, con) => {
                                 attachedDrivers.push(driver.name)
                             }
                             const embed = new MessageEmbed()
-                                .setAuthor("Account information of " + args[0].toUpperCase())
+                                .setAuthor({
+                                    name: "Account information of " + args[0].toUpperCase()
+                                })
                                 .setColor("#ff0000")
                                 .addField("Email", "`" + email + "`")
                                 .addField("Account ID", "`" + userId + "`")
@@ -31,7 +33,10 @@ module.exports.run = (bot, message, args, con) => {
                                 .addField("Hardware hash", "`" + ghh.toUpperCase() + "`")
                                 .addField("IP address", "`" + ip + "`")
                                 .addField("Account state", locked == 1 ? "`Locked`" : "`Unlocked`")
-                                .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                                .setFooter({
+                                    text: bot.user.tag,
+                                    iconURL: bot.user.displayAvatarURL()
+                                })
                                 .setTimestamp()
                             message.channel.send({ embeds: [embed] })
                         })
@@ -47,7 +52,10 @@ module.exports.run = (bot, message, args, con) => {
         const embed = new MessageEmbed()
             .setColor("#ff0000")
             .addField("Insufficient permissions", "You need `" + this.help.category.substring(4) + "` permissions to run this command.")
-            .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+            .setFooter({
+                text: bot.user.tag,
+                iconURL: bot.user.displayAvatarURL()
+            })
             .setTimestamp()
         message.channel.send({ embeds: [embed] })
     }

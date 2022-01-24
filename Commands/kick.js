@@ -16,35 +16,50 @@ module.exports.run = (bot, message, args, con) => {
                 axios.post(settings.core.url + '/Engine.svc/ofcmdhook?webhook=false&pid=' + settings.core.botPersonaId + '&cmd=kick%20' + result[0].name, null, { headers: { Authorization: settings.core.token.openfire } }).then(res => { }).catch(error => { })
                 if (reason.length > 0) {
                     const embed = new MessageEmbed()
-                    .setAuthor(result[0].name + " has been kicked.", settings.url.avatarEndpoint + icon)
-                    .setColor("#fff700")
-                    .addField("Reason", reason)
-                    .addField("Kicked by", "<@" + message.author.id + ">")
-                    .setFooter(bot.user.tag, bot.user.displayAvatarURL())
-                    .setTimestamp()
-                bot.channels.cache.get(settings.channel.banlogs).send({ embeds: [embed] })
-                message.channel.send({ embeds: [embed] })
+                        .setAuthor({
+                            name: result[0].name + " has been kicked.",
+                            iconURL: settings.url.avatarEndpoint + icon
+                        })
+                        .setColor("#fff700")
+                        .addField("Reason", reason)
+                        .addField("Kicked by", "<@" + message.author.id + ">")
+                        .setFooter({
+                            text: bot.user.tag,
+                            iconURL: bot.user.displayAvatarURL()
+                        })
+                        .setTimestamp()
+                    bot.channels.cache.get(settings.channel.banlogs).send({ embeds: [embed] })
+                    message.channel.send({ embeds: [embed] })
                 } else {
                     const embed = new MessageEmbed()
-                    .setAuthor(result[0].name + " has been kicked.", settings.url.avatarEndpoint + icon)
-                    .setColor("#fff700")
-                    .addField("Reason", "No reason specified.")
-                    .addField("Kicked by", "<@" + message.author.id + ">")
-                    .setFooter(bot.user.tag, bot.user.displayAvatarURL())
-                    .setTimestamp()
-                bot.channels.cache.get(settings.channel.banlogs).send({ embeds: [embed] })
-                message.channel.send({ embeds: [embed] })
+                        .setAuthor({
+                            name: result[0].name + " has been kicked.",
+                            iconURL: settings.url.avatarEndpoint + icon
+                        })
+                        .setColor("#fff700")
+                        .addField("Reason", "No reason specified.")
+                        .addField("Kicked by", "<@" + message.author.id + ">")
+                        .setFooter({
+                            text: bot.user.tag,
+                            iconURL: bot.user.displayAvatarURL()
+                        })
+                        .setTimestamp()
+                    bot.channels.cache.get(settings.channel.banlogs).send({ embeds: [embed] })
+                    message.channel.send({ embeds: [embed] })
                 }
             }
             else message.channel.send("Cannot find the player **" + args[0] + "** in database.")
         })
     } else {
         const embed = new MessageEmbed()
-        .setColor("#ff0000")
-        .addField("Insufficient permissions", "You need `" + this.help.category.substring(4) + "` permissions to run this command.")
-        .setFooter(bot.user.tag, bot.user.displayAvatarURL())
-        .setTimestamp()
-    message.channel.send({ embeds: [embed] })
+            .setColor("#ff0000")
+            .addField("Insufficient permissions", "You need `" + this.help.category.substring(4) + "` permissions to run this command.")
+            .setFooter({
+                text: bot.user.tag,
+                iconURL: bot.user.displayAvatarURL()
+            })
+            .setTimestamp()
+        message.channel.send({ embeds: [embed] })
     }
 }
 
@@ -53,5 +68,5 @@ module.exports.help = {
     description: ["Kick a player from the game."],
     category: "[⚔️] Moderator",
     args: "[player] [reason]",
-    roles: [settings.role.admin,settings.role.moderator] 
+    roles: [settings.role.admin, settings.role.moderator]
 };

@@ -5,7 +5,7 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports.run = (bot, message, args, con) => {
     if ((message.channel.id === settings.channel.command.admin) && (message.member && message.member.roles.cache.find(r => r.id === settings.role.admin))) {
-        let sqlquery = message.replace(settings.bot.prefix+"sql ", "").replace("```sql", "").replace("```", "");
+        let sqlquery = message.replace(settings.bot.prefix + "sql ", "").replace("```sql", "").replace("```", "");
         con.query(sqlquery, (err, sqlcommand) => {
             if (err) {
                 message.channel.send("Failed to execute command: " + err);
@@ -16,14 +16,14 @@ module.exports.run = (bot, message, args, con) => {
                     const embed = new MessageEmbed()
                     embed.setColor("#ff6600")
 
-                    switch(sqlcommandstatement.toLowerCase()) {
+                    switch (sqlcommandstatement.toLowerCase()) {
                         case "update":
                             embed.setDescription("```" + JSON.stringify(sqlcommand) + "```");
                             break;
                         default:
                             asTableResult = asTable(sqlcommand);
 
-                            if(asTableResult.length <= 1950) {
+                            if (asTableResult.length <= 1950) {
                                 embed.setDescription("```" + asTableResult + "```");
                             } else {
                                 embed.setDescription("```Result was too large, please LIMIT 1```");
@@ -31,19 +31,25 @@ module.exports.run = (bot, message, args, con) => {
                             break;
                     }
 
-                    embed.setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                    embed.setFooter({
+                        text: bot.user.tag,
+                        iconURL: bot.user.displayAvatarURL()
+                    })
                     embed.setTimestamp()
-                    message.channel.send({embeds:[embed]})
+                    message.channel.send({ embeds: [embed] })
                 }
             }
         });
     } else {
         const embed = new MessageEmbed()
-        .setColor("#ff0000")
-        .addField("Insufficient permissions", "You need `" + this.help.category.substring(4) + "` permissions to run this command.")
-        .setFooter(bot.user.tag, bot.user.displayAvatarURL())
-        .setTimestamp()
-    message.channel.send({ embeds: [embed] })
+            .setColor("#ff0000")
+            .addField("Insufficient permissions", "You need `" + this.help.category.substring(4) + "` permissions to run this command.")
+            .setFooter({
+                text: bot.user.tag,
+                iconURL: bot.user.displayAvatarURL()
+            })
+            .setTimestamp()
+        message.channel.send({ embeds: [embed] })
     }
 }
 
@@ -52,5 +58,5 @@ module.exports.help = {
     description: ["Proceed a SQL request on the database."],
     category: "[👑] Administrator ",
     args: "[request]",
-    roles: [settings.role.admin] 
+    roles: [settings.role.admin]
 };

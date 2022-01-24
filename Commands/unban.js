@@ -20,21 +20,33 @@ module.exports.run = (bot, message, args, con) => {
                                         con.query("UPDATE USER SET isLocked = 0 WHERE ID = ?", [userid])
                                         if (reason.length > 0) {
                                             const embed = new MessageEmbed()
-                                                .setAuthor(result[0].name + " has been unbanned.", settings.url.avatarEndpoint + icon)
+                                                .setAuthor({
+                                                    name: result[0].name + " has been unbanned.",
+                                                    iconURL: settings.url.avatarEndpoint + icon
+                                                })
                                                 .setColor("#11ff00")
                                                 .addField("Reason", reason)
                                                 .addField("Unbanned by", "<@" + message.author.id + ">")
-                                                .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                                                .setFooter({
+                                                    text: bot.user.tag,
+                                                    iconURL: bot.user.displayAvatarURL()
+                                                })
                                                 .setTimestamp()
                                             bot.channels.cache.get(settings.channel.banlogs).send({ embeds: [embed] })
                                             message.channel.send({ embeds: [embed] })
                                         } else {
                                             const embed = new MessageEmbed()
-                                                .setAuthor(result[0].name + " has been unbanned.", settings.url.avatarEndpoint + icon)
+                                                .setAuthor({
+                                                    name: result[0].name + " has been unbanned.",
+                                                    iconURL: settings.url.avatarEndpoint + icon
+                                                })
                                                 .setColor("#11ff00")
                                                 .addField("Reason", "No reason provided.")
                                                 .addField("Unbanned by", "<@" + message.author.id + ">")
-                                                .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                                                .setFooter({
+                                                    text: bot.user.tag,
+                                                    iconURL: bot.user.displayAvatarURL()
+                                                })
                                                 .setTimestamp()
                                             bot.channels.cache.get(settings.channel.banlogs).send({ embeds: [embed] })
                                             message.channel.send({ embeds: [embed] })
@@ -43,7 +55,10 @@ module.exports.run = (bot, message, args, con) => {
                                     con.query("SELECT email, ID, isLocked FROM USER WHERE gameHardwareHash = ?", [userInfo[0].ghh], (err, otherAcc) => {
                                         if (otherAcc.length > 1) {
                                             const embed = new MessageEmbed()
-                                                .setAuthor(result[0].name + " is also hardware banned on the following accounts", settings.url.avatarEndpoint + icon)
+                                                .setAuthor({
+                                                    name: result[0].name + " is also hardware banned on the following accounts",
+                                                    iconURL: settings.url.avatarEndpoint + icon
+                                                })
                                             message.channel.send({ embeds: [embed] })
                                             otherAcc.forEach(acc => {
                                                 const embed = new MessageEmbed()
@@ -51,7 +66,10 @@ module.exports.run = (bot, message, args, con) => {
                                                     .addField("Email", "`" + acc.email + "`")
                                                     .addField("User ID", "`" + acc.ID + "`")
                                                     .addField("Account state", acc.isLocked == 1 ? "`Locked`" : "`Unlocked`")
-                                                    .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                                                    .setFooter({
+                                                        text: bot.user.tag,
+                                                        iconURL: bot.user.displayAvatarURL()
+                                                    })
                                                     .setTimestamp()
                                                 message.channel.send({ embeds: [embed] })
                                             })
@@ -72,7 +90,10 @@ module.exports.run = (bot, message, args, con) => {
         const embed = new MessageEmbed()
             .setColor("#ff0000")
             .addField("Insufficient permissions", "You need `" + this.help.category.substring(4) + "` permissions to run this command.")
-            .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+            .setFooter({
+                text: bot.user.tag,
+                iconURL: bot.user.displayAvatarURL()
+            })
             .setTimestamp()
         message.channel.send({ embeds: [embed] })
     }

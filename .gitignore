@@ -9,3 +9,4 @@ node_modules
 
 # Ignore local.settings.json
 local.settings.json
+*.code-workspace

@@ -12,14 +12,21 @@ module.exports.run = (bot, message, args, con) => {
                             con.query("UPDATE PERSONA SET name = ? WHERE ID = " + personaid, [args[1].toUpperCase()], err => {
                                 if (!err) {
                                     const embed = new MessageEmbed()
-                                        .setAuthor(args[0].toUpperCase() + " has been renamed.", settings.url.avatarEndpoint + icon)
+                                        .setAuthor({
+                                            name: args[0].toUpperCase() + " has been renamed.",
+                                            iconURL: settings.url.avatarEndpoint + icon
+                                        })
                                         .setColor("#0080ff")
                                         .addField("Renamed to", args[1].toString().toUpperCase())
                                         .addField("Renamed by", "<@" + message.author.id + ">")
-                                        .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                                        .setFooter({
+                                            text: bot.user.tag,
+                                            iconURL: bot.user.displayAvatarURL()
+                                        })
                                         .setTimestamp()
-                                bot.channels.cache.get(settings.channel.banlogs).send({ embeds: [embed] })
-                                message.channel.send({ embeds: [embed] })}
+                                    bot.channels.cache.get(settings.channel.banlogs).send({ embeds: [embed] })
+                                    message.channel.send({ embeds: [embed] })
+                                }
                             })
                         } else {
                             message.channel.send("There is already a **driver** called **" + args[1].toUpperCase() + "**.")
@@ -29,11 +36,17 @@ module.exports.run = (bot, message, args, con) => {
                     con.query("UPDATE PERSONA SET name = 'DRIVER" + personaid + "' WHERE ID = " + personaid, (err, result) => {
                         if (!err) {
                             const embed = new MessageEmbed()
-                                .setAuthor(args[0].toUpperCase() + " has been renamed.", settings.url.avatarEndpoint + icon)
+                                .setAuthor({
+                                    name: args[0].toUpperCase() + " has been renamed.",
+                                    iconURL: settings.url.avatarEndpoint + icon
+                                })
                                 .setColor("#0080ff")
                                 .addField("Renamed to", "DRIVER" + personaid)
                                 .addField("Renamed by", "<@" + message.author.id + ">")
-                                .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                                .setFooter({
+                                    text: bot.user.tag,
+                                    iconURL: bot.user.displayAvatarURL()
+                                })
                                 .setTimestamp()
                             bot.channels.cache.get(settings.channel.banlogs).send({ embeds: [embed] })
                             message.channel.send({ embeds: [embed] })
@@ -48,11 +61,14 @@ module.exports.run = (bot, message, args, con) => {
         })
     } else {
         const embed = new MessageEmbed()
-        .setColor("#ff0000")
-        .addField("Insufficient permissions", "You need `" + this.help.category.substring(4) + "` permissions to run this command.")
-        .setFooter(bot.user.tag, bot.user.displayAvatarURL())
-        .setTimestamp()
-    message.channel.send({ embeds: [embed] })
+            .setColor("#ff0000")
+            .addField("Insufficient permissions", "You need `" + this.help.category.substring(4) + "` permissions to run this command.")
+            .setFooter({
+                text: bot.user.tag,
+                iconURL: bot.user.displayAvatarURL()
+            })
+            .setTimestamp()
+        message.channel.send({ embeds: [embed] })
     }
 };
 
@@ -61,5 +77,5 @@ module.exports.help = {
     description: ["Rename a player in-game. (`new name` is optional)"],
     category: "[⚔️] Moderator",
     args: "[player] [new name]",
-    roles: [settings.role.admin,settings.role.moderator] 
+    roles: [settings.role.admin, settings.role.moderator]
 };

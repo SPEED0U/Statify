@@ -49,11 +49,17 @@ function antispamscam(message, bot) {
                     }
                     message.member.kick('Kicked for spamming "' + message.content + '"')
                     const embed = new MessageEmbed()
-                        .setAuthor(message.author.tag + " has been kicked.", message.author.displayAvatarURL())
+                        .setAuthor({
+                            name: message.author.tag + " has been kicked.",
+                            iconURL: message.author.displayAvatarURL()
+                        })
                         .setColor("#ff0000")
                         .addField("Spamming the following text", "```" + message.content + "```")
                         .addField("Discord user id", "`" + message.author.id + "`")
-                        .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                        .setFooter({
+                            text: bot.user.tag,
+                            iconURL: bot.user.displayAvatarURL()
+                        })
                         .setTimestamp()
                     bot.channels.cache.get(settings.channel.serverlogs).send({ embeds: [embed] })
                     delete users[message.author.id]
@@ -81,11 +87,17 @@ function antispamscam(message, bot) {
                     }
                     message.member.kick('Kicked for spamming "' + message.content + '"')
                     const embed = new MessageEmbed()
-                        .setAuthor(message.author.tag + " has been kicked.", message.author.displayAvatarURL())
+                        .setAuthor({
+                            name: message.author.tag + " has been kicked.",
+                            iconURL: message.author.displayAvatarURL()
+                        })
                         .setColor("#ff0000")
                         .addField("Spamming the following text", "```" + message.content + "```")
                         .addField("Discord user id", "`" + message.author.id + "`")
-                        .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                        .setFooter({
+                            text: bot.user.tag,
+                            iconURL: bot.user.displayAvatarURL()
+                        })
                         .setTimestamp()
                     bot.channels.cache.get(settings.channel.serverlogs).send({ embeds: [embed] })
                     delete users[message.author.id]

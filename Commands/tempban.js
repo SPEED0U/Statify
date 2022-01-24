@@ -51,23 +51,35 @@ module.exports.run = (bot, message, args, con) => {
                                             axios.post(settings.core.url + '/Engine.svc/Send/Announcement', post, config)
                                             if (reason.length > 0) {
                                                 const embed = new MessageEmbed()
-                                                    .setAuthor(result[0].name + " has been temporarily banned.", settings.url.avatarEndpoint + icon)
+                                                    .setAuthor({
+                                                        name: result[0].name + " has been temporarily banned.",
+                                                        iconURL: settings.url.avatarEndpoint + icon
+                                                    })
                                                     .setColor("#ff6600")
                                                     .addField("Reason", reason)
                                                     .addField("Ban duration", nosuffix + " " + units[durationsuffix])
                                                     .addField("Banned by", "<@" + message.author.id + ">")
-                                                    .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                                                    .setFooter({
+                                                        text: bot.user.tag,
+                                                        iconURL: bot.user.displayAvatarURL()
+                                                    })
                                                     .setTimestamp()
                                                 bot.channels.cache.get(settings.channel.banlogs).send({ embeds: [embed] })
                                                 message.channel.send({ embeds: [embed] })
                                             } else {
                                                 const embed = new MessageEmbed()
-                                                    .setAuthor(result[0].name + " has been temporarily banned.", settings.url.avatarEndpoint + icon)
+                                                    .setAuthor({
+                                                        name: result[0].name + " has been temporarily banned.",
+                                                        iconURL: settings.url.avatarEndpoint + icon
+                                                    })
                                                     .setColor("#ff6600")
                                                     .addField("Reason", "No reason specified.")
                                                     .addField("Ban duration", nosuffix + " " + units[durationsuffix])
                                                     .addField("Banned by", "<@" + message.author.id + ">")
-                                                    .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                                                    .setFooter({
+                                                        text: bot.user.tag,
+                                                        iconURL: bot.user.displayAvatarURL()
+                                                    })
                                                     .setTimestamp()
                                                 bot.channels.cache.get(settings.channel.banlogs).send({ embeds: [embed] })
                                                 message.channel.send({ embeds: [embed] })
@@ -91,11 +103,14 @@ module.exports.run = (bot, message, args, con) => {
         }
     } else {
         const embed = new MessageEmbed()
-        .setColor("#ff0000")
-        .addField("Insufficient permissions", "You need `" + this.help.category.substring(4) + "` permissions to run this command.")
-        .setFooter(bot.user.tag, bot.user.displayAvatarURL())
-        .setTimestamp()
-    message.channel.send({ embeds: [embed] })
+            .setColor("#ff0000")
+            .addField("Insufficient permissions", "You need `" + this.help.category.substring(4) + "` permissions to run this command.")
+            .setFooter({
+                text: bot.user.tag,
+                iconURL: bot.user.displayAvatarURL()
+            })
+            .setTimestamp()
+        message.channel.send({ embeds: [embed] })
     }
 }
 

@@ -17,26 +17,38 @@ module.exports.run = (bot, message, args, con) => {
                                 let banEnd = !!ban.ends_at ? ban.ends_at : "Never"
                                 if (banEnd != "Never") {
                                     const embed = new MessageEmbed()
-                                    .setAuthor(" Ban records for " + args[0].toUpperCase(), settings.url.avatarEndpoint + icon)
-                                    .setColor("#ff0000")
-                                    .addField("Started at", ban.started.toLocaleString('en-GB', { timeZone: 'Europe/Paris', hour12: false }))
-                                    .addField("Ended at", banEnd.toLocaleString('en-GB', { timeZone: 'Europe/Paris', hour12: false }))
-                                    .addField("Reason", reason)
-                                    .addField("Ban state", ban.active === 1 ? "Active" : "Inactive")
-                                    .setFooter(bot.user.tag, bot.user.displayAvatarURL())
-                                    .setTimestamp()
-                                    message.channel.send({embeds:[embed]})
+                                        .setAuthor({
+                                            name: "Ban records for " + args[0].toUpperCase(),
+                                            iconURL: settings.url.avatarEndpoint + icon
+                                        })
+                                        .setColor("#ff0000")
+                                        .addField("Started at", ban.started.toLocaleString('en-GB', { timeZone: 'Europe/Paris', hour12: false }))
+                                        .addField("Ended at", banEnd.toLocaleString('en-GB', { timeZone: 'Europe/Paris', hour12: false }))
+                                        .addField("Reason", reason)
+                                        .addField("Ban state", ban.active === 1 ? "Active" : "Inactive")
+                                        .setFooter({
+                                            text: bot.user.tag,
+                                            iconURL: bot.user.displayAvatarURL()
+                                        })
+                                        .setTimestamp()
+                                    message.channel.send({ embeds: [embed] })
                                 } else {
                                     const embed = new MessageEmbed()
-                                    .setAuthor(" Ban records for " + args[0].toUpperCase(), settings.url.avatarEndpoint + icon)
-                                    .setColor("#ff0000")
-                                    .addField("Started at", ban.started.toLocaleString('en-GB', { timeZone: 'Europe/Paris', hour12: false }))
-                                    .addField("Ended at", banEnd.toLocaleString('en-GB', { timeZone: 'Europe/Paris', hour12: false }))
-                                    .addField("Reason", reason)
-                                    .addField("Ban state", ban.active === 1 ? "Active" : "Inactive")
-                                    .setFooter(bot.user.tag, bot.user.displayAvatarURL())
-                                    .setTimestamp()
-                                    message.channel.send({embeds:[embed]})
+                                        .setAuthor({
+                                            name: "Ban records for " + args[0].toUpperCase(),
+                                            iconURL: settings.url.avatarEndpoint + icon
+                                        })
+                                        .setColor("#ff0000")
+                                        .addField("Started at", ban.started.toLocaleString('en-GB', { timeZone: 'Europe/Paris', hour12: false }))
+                                        .addField("Ended at", "This ban has no end date.")
+                                        .addField("Reason", reason)
+                                        .addField("Ban state", ban.active === 1 ? "Active" : "Inactive")
+                                        .setFooter({
+                                            text: bot.user.tag,
+                                            iconURL: bot.user.displayAvatarURL()
+                                        })
+                                        .setTimestamp()
+                                    message.channel.send({ embeds: [embed] })
                                 }
                             })
                         } else {
@@ -51,11 +63,14 @@ module.exports.run = (bot, message, args, con) => {
         });
     } else {
         const embed = new MessageEmbed()
-        .setColor("#ff0000")
-        .addField("Insufficient permissions", "You need `" + this.help.category.substring(4) + "` permissions to run this command.")
-        .setFooter(bot.user.tag, bot.user.displayAvatarURL())
-        .setTimestamp()
-    message.channel.send({ embeds: [embed] })
+            .setColor("#ff0000")
+            .addField("Insufficient permissions", "You need `" + this.help.category.substring(4) + "` permissions to run this command.")
+            .setFooter({
+                text: bot.user.tag,
+                iconURL: bot.user.displayAvatarURL()
+            })
+            .setTimestamp()
+        message.channel.send({ embeds: [embed] })
     }
 }
 
@@ -64,5 +79,5 @@ module.exports.help = {
     description: ["List the ban records of a player."],
     category: "[⚔️] Moderator",
     args: "[player]",
-    roles: [settings.role.admin,settings.role.moderator] 
+    roles: [settings.role.admin, settings.role.moderator]
 };

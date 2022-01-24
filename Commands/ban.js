@@ -26,11 +26,17 @@ module.exports.run = (bot, message, args, con) => {
                                         axios.post(settings.core.url + '/Engine.svc/Send/Announcement', post, config)
                                         if (!err) {
                                             const embed = new MessageEmbed()
-                                                .setAuthor(result[0].name + " has been permanently banned.", settings.url.avatarEndpoint + icon)
+                                                .setAuthor({
+                                                    name: result[0].name + " has been permanently banned.",
+                                                    iconURL: settings.url.avatarEndpoint + icon
+                                                })
                                                 .setColor("#ff0000")
                                                 .addField("Reason", reason)
                                                 .addField("Banned by", "<@" + message.author.id + ">")
-                                                .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                                                .setFooter({
+                                                    text: bot.user.tag,
+                                                    iconURL: bot.user.displayAvatarURL()
+                                                })
                                                 .setTimestamp()
                                             bot.channels.cache.get(settings.channel.banlogs).send({ embeds: [embed] })
                                             message.channel.send({ embeds: [embed] })
@@ -43,11 +49,17 @@ module.exports.run = (bot, message, args, con) => {
                                         axios.post(settings.core.url + '/Engine.svc/Send/Announcement', post, config)
                                         if (!err) {
                                             const embed = new MessageEmbed()
-                                                .setAuthor(result[0].name + " has been permanently banned.", settings.url.avatarEndpoint + icon)
+                                                .setAuthor({
+                                                    name: result[0].name + " has been permanently banned.",
+                                                    iconURL: settings.url.avatarEndpoint + icon
+                                                })
                                                 .setColor("#ff0000")
                                                 .addField("Reason", "No reason specified.")
                                                 .addField("Banned by", "<@" + message.author.id + ">")
-                                                .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                                                .setFooter({
+                                                    text: bot.user.tag,
+                                                    iconURL: bot.user.displayAvatarURL()
+                                                })
                                                 .setTimestamp()
                                             bot.channels.cache.get(settings.channel.banlogs).send({ embeds: [embed] })
                                             message.channel.send({ embeds: [embed] })
@@ -69,7 +81,10 @@ module.exports.run = (bot, message, args, con) => {
         const embed = new MessageEmbed()
             .setColor("#ff0000")
             .addField("Insufficient permissions", "You need `" + this.help.category.substring(4) + "` permissions to run this command.")
-            .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+            .setFooter({
+                text: bot.user.tag,
+                iconURL: bot.user.displayAvatarURL()
+            })
             .setTimestamp()
         message.channel.send({ embeds: [embed] })
     }

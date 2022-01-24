@@ -35,7 +35,10 @@ module.exports.run = (bot, message, args, con) => {
         const embed = new MessageEmbed()
         .setColor("#ff0000")
         .addField("Insufficient permissions", "You need `" + this.help.category.substring(4) + "` permissions to run this command.")
-        .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+        .setFooter({
+            text: bot.user.tag,
+            iconURL: bot.user.displayAvatarURL()
+        })
         .setTimestamp()
     message.channel.send({ embeds: [embed] })
     }

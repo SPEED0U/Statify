@@ -46,8 +46,13 @@ module.exports = (bot, con) => {
             }
 
             bot.guilds.fetch(settings.bot.serverid).then(guild => {
+                var EmbedAuthor = {
+                    name: json.serverName,
+                    url: settings.url.website,
+                    iconURL: guild.iconURL()
+                }
                 const embed = new MessageEmbed()
-                    .setAuthor(json.serverName, guild.iconURL(), settings.url.website)
+                    .setAuthor(EmbedAuthor)
                     .setColor(settings.bot.embed.hexColor)
                     .setDescription("🟢 • Server is up and running.")
                     .addField('🌐 | __Online players__', json.onlineNumber.toString(), true)
@@ -70,7 +75,10 @@ module.exports = (bot, con) => {
                     .addField('⏲️ | __Timezone__', '[' + settings.core.timezone + '](https://time.is/' + settings.core.timezone + ') [' + ('0' + new Date().getHours()).slice(-2) + ':' + ('0' + new Date().getMinutes()).slice(-2) + ']', true)
                     .addField('⏲️ | __Speedbug timer__', (json.secondsToShutDown / 60 / 60) + " hours", true)
                     .addField('⚙️ | __Server version__', json.serverVersion, true)
-                    .setFooter(bot.user.tag, bot.user.displayAvatarURL())
+                    .setFooter({
+                        text: bot.user.tag,
+                        iconURL: bot.user.displayAvatarURL()
+                    })
                     .setTimestamp()
 
 
@@ -92,7 +100,7 @@ module.exports = (bot, con) => {
             });
         }).catch(() => {
             const embed = new MessageEmbed()
-                .setAuthor(settings.core.serverName, settings.bot.embed.logo, settings.url.website)
+                .setAuthor(EmbedAuthor)
                 .setColor("#ff0000")
                 .setDescription("🔴 • Server is offline, check <#" + settings.channel.announcement + "> for further informations.")
                 .addField('🌐 | __Online players__', "N/A", true)
@@ -104,7 +112,9 @@ module.exports = (bot, con) => {
                 .addField('⏲️ | __Timezone__', '[CET](https://time.is/fr/CET) [' + ('0' + new Date().getHours()).slice(-2) + ':' + ('0' + new Date().getMinutes()).slice(-2) + ']', true)
                 .addField('⏲️ | __Speedbug timer__', "N/A", true)
                 .addField('⚙️ | __Server version__', "N/A", true)
-                .setFooter("Last update")
+                .setFooter({
+                    text: "last update"
+                })
                 .setTimestamp()
 
             channel.messages.fetch({ limit: 1 }).then(messages => {

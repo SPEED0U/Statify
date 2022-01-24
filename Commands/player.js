@@ -7,7 +7,10 @@ module.exports.run = (bot, message, args, con) => {
             if (result.length > 0) {
                 let description = !!result[0].personamotto ? result[0].personamotto : "Motto not set."
                 const embed = new MessageEmbed()
-                    .setAuthor(result[0].personaname, "", settings.url.website + settings.url.pathToProfile + result[0].personaid, true)
+                    .setAuthor({
+                        name: result[0].personaname,
+                        iconURL: settings.url.website + settings.url.pathToProfile + result[0].personaid
+                    })
                     .setThumbnail(settings.url.avatarEndpoint + result[0].iconIndex + settings.url.avatarFormat, true)
                 if (result[0].prestige > 0) {
                     embed.addField("__Level__", result[0].personalevel + " (Prestige: " + result[0].prestige + ")", true)
@@ -50,11 +53,14 @@ module.exports.run = (bot, message, args, con) => {
         })
     } else {
         const embed = new MessageEmbed()
-        .setColor("#ff0000")
-        .addField("Insufficient permissions", "You need `" + this.help.category.substring(4) + "` permissions to run this command.")
-        .setFooter(bot.user.tag, bot.user.displayAvatarURL())
-        .setTimestamp()
-    message.channel.send({ embeds: [embed] })
+            .setColor("#ff0000")
+            .addField("Insufficient permissions", "You need `" + this.help.category.substring(4) + "` permissions to run this command.")
+            .setFooter({
+                text: bot.user.tag,
+                iconURL: bot.user.displayAvatarURL()
+            })
+            .setTimestamp()
+        message.channel.send({ embeds: [embed] })
     }
 }
 
