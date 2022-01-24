@@ -1,15 +1,15 @@
 {
     "name": "statify",
-    "version": "1.2.1",
-    "description": "",
+    "version": "1.2.2",
+    "description": "With this Discord bot you can easily manage your Need for Speed: World server and get stats of course!",
     "main": "index.js",
     "author": "Speedou",
     "license": "MIT",
     "dependencies": {
         "as-table": "^1.0.55",
-        "axios": "^0.24.0",
+        "axios": "^0.25.0",
         "cron": "^1.8.2",
-        "discord.js": "^13.3.1",
+        "discord.js": "^13.6.0",
         "mysql": "^2.18.1"
     }
 }
