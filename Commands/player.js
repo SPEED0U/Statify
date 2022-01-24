@@ -9,7 +9,6 @@ module.exports.run = (bot, message, args, con) => {
                 const embed = new MessageEmbed()
                     .setAuthor({
                         name: result[0].personaname,
-                        iconURL: settings.url.website + settings.url.pathToProfile + result[0].personaid
                     })
                     .setThumbnail(settings.url.avatarEndpoint + result[0].iconIndex + settings.url.avatarFormat, true)
                 if (result[0].prestige > 0) {
