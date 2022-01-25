@@ -46,13 +46,12 @@ module.exports = (bot, con) => {
             }
 
             bot.guilds.fetch(settings.bot.serverid).then(guild => {
-                var EmbedAuthor = {
-                    name: json.serverName,
-                    url: settings.url.website,
-                    iconURL: guild.iconURL()
-                }
                 const embed = new MessageEmbed()
-                    .setAuthor(EmbedAuthor)
+                    .setAuthor({
+                        name: json.serverName,
+                        url: settings.url.website,
+                        iconURL: guild.iconURL()
+                    })
                     .setColor(settings.bot.embed.hexColor)
                     .setDescription("🟢 • Server is up and running.")
                     .addField('🌐 | __Online players__', json.onlineNumber.toString(), true)
@@ -100,7 +99,11 @@ module.exports = (bot, con) => {
             });
         }).catch(() => {
             const embed = new MessageEmbed()
-                .setAuthor(EmbedAuthor)
+                .setAuthor({
+                    name: json.serverName,
+                    url: settings.url.website,
+                    iconURL: guild.iconURL()
+                })
                 .setColor("#ff0000")
                 .setDescription("🔴 • Server is offline, check <#" + settings.channel.announcement + "> for further informations.")
                 .addField('🌐 | __Online players__', "N/A", true)
