@@ -100,7 +100,7 @@ module.exports = (bot, con) => {
         }).catch(() => {
             const embed = new MessageEmbed()
                 .setAuthor({
-                    name: json.serverName,
+                    name: settings.core.serverName,
                     url: settings.url.website,
                     iconURL: guild.iconURL()
                 })
