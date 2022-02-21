@@ -98,6 +98,7 @@ module.exports = (bot, con) => {
                 })
             });
         }).catch(() => {
+            bot.guilds.fetch(settings.bot.serverid).then(guild => {
             const embed = new MessageEmbed()
                 .setAuthor({
                     name: settings.core.serverName,
@@ -128,7 +129,7 @@ module.exports = (bot, con) => {
                     channel.send({ embeds: [embed] })
                 }
             })
-
+        });
             bot.user.setActivity({
                 name: "players complain because they don't read #📰-announcements.",
                 type: "WATCHING",
