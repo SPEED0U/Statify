@@ -45,6 +45,10 @@ module.exports = (bot, con) => {
                 }
             }
 
+            var srvVer = json.serverVersion.substring(
+                str.indexOf("-") + 1, 
+                str.lastIndexOf("-")
+            );
             bot.guilds.fetch(settings.bot.serverid).then(guild => {
                 const embed = new MessageEmbed()
                     .setAuthor({
@@ -73,7 +77,7 @@ module.exports = (bot, con) => {
                     .addField('👮 | __Moderators__', "<@&" + settings.role.moderator + ">", true)
                     .addField('⏲️ | __Timezone__', '[' + settings.core.timezone + '](https://time.is/' + settings.core.timezone + ') [' + ('0' + new Date().getHours()).slice(-2) + ':' + ('0' + new Date().getMinutes()).slice(-2) + ']', true)
                     .addField('⏲️ | __Speedbug timer__', (json.secondsToShutDown / 60 / 60) + " hours", true)
-                    .addField('⚙️ | __Server version__', json.serverVersion, true)
+                    .addField('⚙️ | __Server version__', srvVer, true)
                     .setFooter({
                         text: bot.user.tag,
                         iconURL: bot.user.displayAvatarURL()
@@ -99,37 +103,37 @@ module.exports = (bot, con) => {
             });
         }).catch(() => {
             bot.guilds.fetch(settings.bot.serverid).then(guild => {
-            const embed = new MessageEmbed()
-                .setAuthor({
-                    name: settings.core.serverName,
-                    url: settings.url.website,
-                    iconURL: guild.iconURL()
-                })
-                .setColor("#ff0000")
-                .setDescription("🔴 • Server is offline, check <#" + settings.channel.announcement + "> for further informations.")
-                .addField('🌐 | __Online players__', "N/A", true)
-                .addField('🔖 | __Player peak__', "N/A", true)
-                .addField('🎫 | __Registered players__', "N/A", true)
-                .addField('📈 | __Multiplier__', "N/A", true)
-                .addField('🕵 | __Admins__', "<@&" + settings.role.admin + ">", true)
-                .addField('👮 | __Moderators__', "<@&" + settings.role.admin + ">", true)
-                .addField('⏲️ | __Timezone__', '[CET](https://time.is/fr/CET) [' + ('0' + new Date().getHours()).slice(-2) + ':' + ('0' + new Date().getMinutes()).slice(-2) + ']', true)
-                .addField('⏲️ | __Speedbug timer__', "N/A", true)
-                .addField('⚙️ | __Server version__', "N/A", true)
-                .setFooter({
-                    text: "last update"
-                })
-                .setTimestamp()
+                const embed = new MessageEmbed()
+                    .setAuthor({
+                        name: settings.core.serverName,
+                        url: settings.url.website,
+                        iconURL: guild.iconURL()
+                    })
+                    .setColor("#ff0000")
+                    .setDescription("🔴 • Server is offline, check <#" + settings.channel.announcement + "> for further informations.")
+                    .addField('🌐 | __Online players__', "N/A", true)
+                    .addField('🔖 | __Player peak__', "N/A", true)
+                    .addField('🎫 | __Registered players__', "N/A", true)
+                    .addField('📈 | __Multiplier__', "N/A", true)
+                    .addField('🕵 | __Admins__', "<@&" + settings.role.admin + ">", true)
+                    .addField('👮 | __Moderators__', "<@&" + settings.role.admin + ">", true)
+                    .addField('⏲️ | __Timezone__', '[CET](https://time.is/fr/CET) [' + ('0' + new Date().getHours()).slice(-2) + ':' + ('0' + new Date().getMinutes()).slice(-2) + ']', true)
+                    .addField('⏲️ | __Speedbug timer__', "N/A", true)
+                    .addField('⚙️ | __Server version__', "N/A", true)
+                    .setFooter({
+                        text: "last update"
+                    })
+                    .setTimestamp()
 
-            channel.messages.fetch({ limit: 1 }).then(messages => {
-                let lastMessage = messages.first()
-                if (lastMessage) {
-                    lastMessage.edit({ embeds: [embed] });
-                } else {
-                    channel.send({ embeds: [embed] })
-                }
-            })
-        });
+                channel.messages.fetch({ limit: 1 }).then(messages => {
+                    let lastMessage = messages.first()
+                    if (lastMessage) {
+                        lastMessage.edit({ embeds: [embed] });
+                    } else {
+                        channel.send({ embeds: [embed] })
+                    }
+                })
+            });
             bot.user.setActivity({
                 name: "players complain because they don't read #📰-announcements.",
                 type: "WATCHING",
