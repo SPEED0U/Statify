@@ -45,11 +45,11 @@ module.exports = (bot, con) => {
                 }
             }
 
-            var srvVer = json.serverVersion.substring(
-                str.indexOf("-") + 1, 
-                str.lastIndexOf("-")
-            );
             bot.guilds.fetch(settings.bot.serverid).then(guild => {
+                var srvVer = json.serverVersion.substring(
+                    json.serverVersion.indexOf(""), 
+                    json.serverVersion.lastIndexOf(" -")
+                )
                 const embed = new MessageEmbed()
                     .setAuthor({
                         name: json.serverName,
