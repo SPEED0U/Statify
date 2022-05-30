@@ -5,7 +5,7 @@ module.exports.run = (bot, message, args, con) => {
         con.query("SELECT ID FROM USER WHERE email = ?", [args[0]], (err, userid) => {
             con.query("SELECT ID, USERID, iconIndex FROM PERSONA WHERE name = ?", [args[0]], (err, pid) => {
                 if (pid.length > 0 || userid.length > 0) {
-                    con.query("SELECT EMAIL, gameHardwareHash, IP_ADDRESS, lastLogin, isLocked, created, ID, premium FROM USER WHERE id = ?", [pid.length > 0 ? pid[0].USERID : userid[0].ID], (err, uid) => {
+                    con.query("SELECT EMAIL, gameHardwareHash, IP_ADDRESS, lastLogin, isLocked, created, ID, premium, discord FROM USER WHERE id = ?", [pid.length > 0 ? pid[0].USERID : userid[0].ID], (err, uid) => {
                         var email = uid[0].EMAIL
                         var ghh = uid[0].gameHardwareHash
                         var ip = uid[0].IP_ADDRESS
@@ -14,25 +14,27 @@ module.exports.run = (bot, message, args, con) => {
                         var accCreation = uid[0].created
                         var userId = uid[0].ID
                         var premium = uid[0].premium.readInt8()
+                        var discordid = uid[0].discord
                         con.query("SELECT name FROM PERSONA WHERE USERID = ?", [userId], (err, drivers) => {
                             var attachedDrivers = []
                             for (driver of drivers) {
-                                attachedDrivers.push(driver.name)
+                                attachedDrivers.push("`" + driver.name + "`")
                             }
                             const embed = new MessageEmbed()
                                 .setAuthor({
                                     name: "Account information of " + args[0].toUpperCase()
                                 })
                                 .setColor("#ff0000")
-                                .addField("Email", "`" + email + "`")
                                 .addField("Account ID", "`" + userId + "`")
+                                .addField("Hardware hash", "`" + ghh.toUpperCase() + "`")
+                                .addField("Email", "`" + email + "`")
+                                .addField("Discord ID", discordid != null ? "`" + discordid + "` alias <@" + discordid + ">" : "`No account linked`")
+                                .addField("IP address", "`" + ip + "`")
+                                .addField("Membership", premium == 1 ? "`Premium`" : "`Freemium`")
+                                .addField("Account state", locked == 1 ? "`Locked`" : "`Unlocked`")                                
                                 .addField("Account creation date", "`" + accCreation.toLocaleString('en-GB', { timeZone: "Europe/Paris", hour12: false }) + "`")
                                 .addField("Last connection", "`" + lastlog.toLocaleString('en-GB', { timeZone: "Europe/Paris", hour12: false }) + "`")
-                                .addField("Membership", premium == 1 ? "`Premium`" : "`Freemium`")
-                                .addField("Attached drivers", "`" + attachedDrivers.join(", ") + "`")
-                                .addField("Hardware hash", "`" + ghh.toUpperCase() + "`")
-                                .addField("IP address", "`" + ip + "`")
-                                .addField("Account state", locked == 1 ? "`Locked`" : "`Unlocked`")
+                                .addField("Attached drivers", attachedDrivers.join(", "))
                                 .setFooter({
                                     text: bot.user.tag,
                                     iconURL: bot.user.displayAvatarURL()
