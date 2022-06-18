@@ -17,7 +17,7 @@ module.exports.run = (bot, message, args, con) => {
                             if (result1.length == 0) {
                                 con.query("INSERT INTO `BAN` (`id`, `ends_at`, `reason`, `started`, `banned_by_id`, `user_id`, `active`) VALUES (NULL, NULL, ?, NOW(), ?, ?, 1)", [reason, settings.core.botPersonaId, userid], err => {
                                     con.query("UPDATE HARDWARE_INFO SET banned = 1 WHERE userId = ? AND hardwareHash = ?", [userid, userInfo[0].ghh]), (err)
-                                    axios.post(settings.core.url + '/Engine.svc/ofcmdhook?cmd=/kick%20' + result[0].name + '&pid=' + result[0].ID + '&webhook=0', null, { headers: { Authorization: settings.core.token.openfire } }).then(res => {console.log(res)}).catch(error => {console.log(error)})
+                                    axios.post(settings.core.url + '/Engine.svc/ofcmdhook?cmd=/kick%20' + result[0].name + '&pid=' + settings.core.botPersonaId + '&webhook=0', null, { headers: { Authorization: settings.core.token.openfire } }).then(res => {console.log(res)}).catch(error => {console.log(error)})
                                     if (reason.length >= 1) {
                                         const post = new URLSearchParams();
                                         post.append('message', `TXT_RED,[${result[0].name}] HAS BEEN PERMANENTLY BANNED.`);
