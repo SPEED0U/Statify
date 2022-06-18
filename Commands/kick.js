@@ -13,7 +13,7 @@ module.exports.run = (bot, message, args, con) => {
                 var icon = result[0].iconIndex + settings.url.avatarFormat
                 const config = { headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' } };
                 axios.post(settings.core.url + '/Engine.svc/Send/Announcement', post, config)
-                axios.post(settings.core.url + '/Engine.svc/ofcmdhook?cmd=/kick%20' + result[0].name + '&pid=' + settings.core.botPersonaId + '&webhook=0', null, { headers: { Authorization: settings.core.token.openfire } }).then(res => {console.log(res)}).catch(error => {console.log(error)})
+                axios.post(settings.core.url + '/Engine.svc/ofcmdhook?cmd=/kick%20' + result[0].name + '&pid=' + settings.core.botPersonaId + '&webhook=0', null, { headers: { Authorization: settings.core.token.openfire } }).catch(error => {console.log(error)})
                 if (reason.length > 0) {
                     const embed = new MessageEmbed()
                         .setAuthor({
