@@ -148,7 +148,6 @@ function eventsthisweek(bot, message, args, con) {
 function onlineplayers(bot, message, args, con) {
     axios.get(settings.core.url + "/Engine.svc/GetServerInformation").then(response => {
         const json = response.data
-        if (!err) {
             const embed = new MessageEmbed()
                 .setAuthor({
                     name: "Statistics",
@@ -161,14 +160,12 @@ function onlineplayers(bot, message, args, con) {
                 })
                 .setTimestamp()
             message.channel.send({ embeds: [embed] })
-        }
     });
 }
 
 function registeredplayers(bot, message, args, con) {
     axios.get(settings.core.url + "/Engine.svc/GetServerInformation").then(response => {
         const json = response.data
-        if (!err) {
             const embed = new MessageEmbed()
                 .setAuthor({
                     name: "Statistics",
@@ -181,7 +178,6 @@ function registeredplayers(bot, message, args, con) {
                 })
                 .setTimestamp()
             message.channel.send({ embeds: [embed] })
-        }
     });
 }
 
