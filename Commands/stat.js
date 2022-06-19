@@ -154,7 +154,7 @@ function onlineplayers(bot, message, args, con) {
                     name: "Statistics",
                 })
                 .setColor("#b2c6d1")
-                .addField("Players online", "`" + Intl.NumberFormat('en-US').format(json.numberOfOnline) + "` players actually online.")
+                .addField("Players online", "`" + Intl.NumberFormat('en-US').format(json.onlineNumber) + "` players actually online.")
                 .setFooter({
                     text: bot.user.tag,
                     iconURL: bot.user.displayAvatarURL()
