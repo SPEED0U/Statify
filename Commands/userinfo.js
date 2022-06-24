@@ -20,7 +20,6 @@ module.exports.run = (bot, message, args, con) => {
                             for (driver of drivers) {
                                 attachedDrivers.push("`" + driver.name + "`")
                             }
-                            console.log(attachedDrivers.length)
                             const embed = new MessageEmbed()
                                 .setAuthor({
                                     name: "Account information of " + args[0].toUpperCase()
