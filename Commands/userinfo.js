@@ -20,6 +20,7 @@ module.exports.run = (bot, message, args, con) => {
                             for (driver of drivers) {
                                 attachedDrivers.push("`" + driver.name + "`")
                             }
+                            console.log(attachedDrivers.length)
                             const embed = new MessageEmbed()
                                 .setAuthor({
                                     name: "Account information of " + args[0].toUpperCase()
@@ -34,8 +35,12 @@ module.exports.run = (bot, message, args, con) => {
                                 .addField("Account state", locked == 1 ? "`Locked`" : "`Unlocked`")                                
                                 .addField("Account creation date", "`" + accCreation.toLocaleString('en-GB', { timeZone: "Europe/Paris", hour12: false }) + "`")
                                 .addField("Last connection", "`" + lastlog.toLocaleString('en-GB', { timeZone: "Europe/Paris", hour12: false }) + "`")
-                                .addField("Attached drivers", attachedDrivers.join(", "))
-                                .setFooter({
+                                if (attachedDrivers.length < 1) {
+                                    embed.addField("Attached drivers", "`This account doesn't have any drivers.`")
+                                } else {
+                                    embed.addField("Attached drivers", attachedDrivers.join(", "))
+                                }
+                                embed.setFooter({
                                     text: bot.user.tag,
                                     iconURL: bot.user.displayAvatarURL()
                                 })
