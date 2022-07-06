@@ -4,6 +4,9 @@ const { MessageEmbed } = require('discord.js');
 module.exports.run = (bot, message, args, con) => {
     if (message.channel.id === settings.channel.command.admin || message.channel.id === settings.channel.command.moderator && (message.member && message.member.roles.cache.find(r => r.id === settings.role.moderator))) {
         con.query("SELECT USERID, iconIndex FROM PERSONA WHERE name = ?", [args[0]], (err, result) => {
+            if (args[0] === undefined) {
+                message.channel.send("Put the `driver` name after the command, <@" + message.author.id + "> you bozo.");
+            } else {
             if (err) {
                 message.channel.send("Failed to execute command: " + err);
             } else {
@@ -59,7 +62,7 @@ module.exports.run = (bot, message, args, con) => {
                 } else {
                     message.channel.send("Driver **" + args[0].toUpperCase() + "** not found.");
                 }
-            }
+            }}
         });
     } else {
         const embed = new MessageEmbed()
