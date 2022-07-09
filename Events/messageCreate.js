@@ -63,7 +63,11 @@ function antispamscam(message, bot) {
                             })
                             .setTimestamp()
                         bot.channels.cache.get(settings.channel.serverlogs).send({ embeds: [embed] })
-                        delete users[message.author.id]
+                        try {
+                            delete users[message.author.id]
+                        } catch (error) {
+                            console.log("The message that should've been deleted by myself has already been deleted.")
+                        }
                     }
                 } else {
                     user.messages = [message]
@@ -101,7 +105,11 @@ function antispamscam(message, bot) {
                             })
                             .setTimestamp()
                         bot.channels.cache.get(settings.channel.serverlogs).send({ embeds: [embed] })
-                        delete users[message.author.id]
+                        try {
+                            delete users[message.author.id]
+                        } catch (error) {
+                            console.log("The message that should've been deleted by myself has already been deleted.")
+                        }
                     }
                 } else {
                     user.messages = [message]
