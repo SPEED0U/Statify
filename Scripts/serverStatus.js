@@ -13,7 +13,7 @@ module.exports = (bot, con) => {
         try {
             con.query("SELECT * FROM ONLINE_USERS ORDER BY numberOfOnline DESC LIMIT 1", function (err, result) {
                 if (!err) countMaxOnline = result[0].numberOfOnline;
-                if (!err) timestamp = result[0].ID * 1000;
+                if (!err) timestamp = result[0].time * 1000;
                 date = new Date(timestamp);
                 datePlayerPeak = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
             });
