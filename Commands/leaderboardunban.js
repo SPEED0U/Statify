@@ -4,8 +4,8 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports.run = (bot, message, args, con) => {
     if (message.channel.id === settings.channel.command.admin || message.channel.id === settings.channel.command.moderator && (message.member && message.member.roles.cache.find(r => r.id === settings.role.moderator))) {
-        con.query("SELECT BAN.id FROM BAN INNER JOIN PERSONA ON PERSONA.USERID = BAN.user_id WHERE PERSONA.NAME = ?", [args[0].toUpperCase()], (err, result) => {
-            if (result.length == 1) {
+        con.query("SELECT BAN.id FROM BAN INNER JOIN PERSONA ON PERSONA.USERID = BAN.user_id WHERE PERSONA.NAME = ?", [args[0]], (err, result) => {
+            if (result.length > 0) {
                 con.query("DELETE FROM BAN WHERE ID = ?", [result[0].id], (err2, result2) => {
                     if(err2) { 
                         message.channel.send("Cannot remove leaderoard ban from user **" + args[0] + "**.")
