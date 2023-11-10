@@ -7,7 +7,7 @@
     "license": "MIT",
     "dependencies": {
         "as-table": "^1.0.55",
-        "axios": "^0.25.0",
+        "axios": "^1.6.0",
         "cron": "^1.8.2",
         "discord.js": "^13.6.0",
         "mysql": "^2.18.1"
